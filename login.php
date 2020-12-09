@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 include_once 'admin/Dbcon.php';
 include_once 'admin/User.php';
 
@@ -11,6 +9,10 @@ if (isset($_POST['login'])) {
 
     $login_user = new User();
     $login_user->login($email, $password, $db->conn);
+}
+
+if (isset($_GET['logout'])) {
+    unset($_SESSION['userdata']);
 }
 
 ?>
@@ -33,11 +35,11 @@ if (isset($_POST['login'])) {
                         <form method="POST">
                             <div>
                                 <span>Email Address<label>*</label></span>
-                                <input type="email" name="email">
+                                <input type="email" name="email" pattern="^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,4}$" title="yourname@example.com" required>
                             </div>
                             <div>
                                 <span>Password<label>*</label></span>
-                                <input type="password" name="pass">
+                                <input type="password" name="pass" pattern="^[a-zA-Z0-9/_*/@*/.*/#*/%*/!*/=*/$*]{8,16}$" title="should contain a-z, A-Z, 0-9, _, @, ., #, %, !, $" required>
                             </div>
                             <a class="forgot" href="#">Forgot Your Password?</a>
                             <input type="submit" value="Login" name="login">
