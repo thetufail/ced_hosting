@@ -1,4 +1,5 @@
 <!-- <?php session_start(); ?> -->
+<?php require_once 'admin/Product.php'; ?>
 <!--
 Author: W3layouts
 Author URL: http://w3layouts.com
@@ -70,10 +71,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hosting<i class="caret"></i></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="linuxhosting.php">Linux hosting</a></li>
-                                    <li><a href="wordpresshosting.php">WordPress Hosting</a></li>
-                                    <li><a href="windowshosting.php">Windows Hosting</a></li>
-                                    <li><a href="cmshosting.php">CMS Hosting</a></li>
+                                    <?php $show_categories = new Product(); ?>
+                                    <?php $result = $show_categories->show_category($db->conn); ?>
+                                    <?php foreach ($result as $key => $value) { ?>
+                                        <input type="hidden" name=<?php echo $value['prod_parent_id']; ?> value=<?php echo $value['prod_parent_id']; ?>>
+                                        <li><a href=<?php echo $value['link']; ?>><?php echo $value['prod_name']; ?></a></li>
+                                    <?php } ?>
+                                        <!-- <li><a href="wordpresshosting.php">WordPress Hosting</a></li>
+                                        <li><a href="windowshosting.php">Windows Hosting</a></li>
+                                        <li><a href="cmshosting.php">CMS Hosting</a></li> -->
                                 </ul>
                             </li>
                             <li><a href="pricing.php">Pricing</a></li>

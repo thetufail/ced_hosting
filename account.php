@@ -54,7 +54,7 @@ if (isset($_POST['signup'])) {
                                 <option value="What was your dream job as a child?">What was your dream job as a child?</option>
                                 <option value="What is your favourite teacher's nickname?">What is your favourite teacher's nickname?</option>
                             </select>
-                            <input type="text" name="security_answer" title="AlphaNumeric are allowed" pattern='^([A-Za-z0-9]+ )+[A-Za-z0-9]+$|^[A-Za-z0-9]+$'>
+                            <input type="text" name="security_answer" title="AlphaNumeric are allowed" pattern="^[0-9]*[A-Za-z]+[A-Za-z0-9]*$">
                         </div>
                         <!-- pattern="^(([0-9][a-zA-Z]) | ([a-zA-Z][0-9]?) | ([a-zA-Z]))" -->
                         <!-- pattern="^([a-z+A-Z+0-9+]|([a-zA-Z]+))$" -->

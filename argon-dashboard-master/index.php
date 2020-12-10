@@ -1,5 +1,7 @@
 <?php session_start(); ?>
-<?php if (isset($_GET['logout']) && $_GET['logout'] !=null) { unset($_SESSION['login']); } ?>
+<?php if (isset($_GET['logout']) && $_GET['logout'] != null) {
+  unset($_SESSION['login']);
+} ?>
 <?php require_once 'header.php'; ?>
 <!-- Main content -->
 <div class="main-content" id="panel">
@@ -58,7 +60,9 @@
                     <div class="col ml--2">
                       <div class="d-flex justify-content-between align-items-center">
                         <div>
-                          <h4 class="mb-0 text-sm"><?php if (isset($_SESSION['login'])) { echo 'Admin'; } else { ?> John Snow <?php } ?></h4>
+                          <h4 class="mb-0 text-sm"><?php if (isset($_SESSION['login'])) {
+                                                      echo 'Admin';
+                                                    } else { ?> John Snow <?php } ?></h4>
                         </div>
                         <div class="text-right text-muted">
                           <small>2 hrs ago</small>
@@ -77,7 +81,9 @@
                     <div class="col ml--2">
                       <div class="d-flex justify-content-between align-items-center">
                         <div>
-                          <h4 class="mb-0 text-sm"><?php if (isset($_SESSION['login'])) { echo 'Admin'; } else { ?> John Snow <?php } ?></h4>
+                          <h4 class="mb-0 text-sm"><?php if (isset($_SESSION['login'])) {
+                                                      echo 'Admin';
+                                                    } else { ?> John Snow <?php } ?></h4>
                         </div>
                         <div class="text-right text-muted">
                           <small>3 hrs ago</small>
@@ -96,7 +102,9 @@
                     <div class="col ml--2">
                       <div class="d-flex justify-content-between align-items-center">
                         <div>
-                          <h4 class="mb-0 text-sm"><?php if (isset($_SESSION['login'])) { echo 'Admin'; } else { ?> John Snow <?php } ?></h4>
+                          <h4 class="mb-0 text-sm"><?php if (isset($_SESSION['login'])) {
+                                                      echo 'Admin';
+                                                    } else { ?> John Snow <?php } ?></h4>
                         </div>
                         <div class="text-right text-muted">
                           <small>5 hrs ago</small>
@@ -115,7 +123,9 @@
                     <div class="col ml--2">
                       <div class="d-flex justify-content-between align-items-center">
                         <div>
-                          <h4 class="mb-0 text-sm"><?php if (isset($_SESSION['login'])) { echo 'Admin'; } else { ?> John Snow <?php } ?></h4>
+                          <h4 class="mb-0 text-sm"><?php if (isset($_SESSION['login'])) {
+                                                      echo 'Admin';
+                                                    } else { ?> John Snow <?php } ?></h4>
                         </div>
                         <div class="text-right text-muted">
                           <small>2 hrs ago</small>
@@ -134,7 +144,9 @@
                     <div class="col ml--2">
                       <div class="d-flex justify-content-between align-items-center">
                         <div>
-                          <h4 class="mb-0 text-sm"><?php if (isset($_SESSION['login'])) { echo 'Admin'; } else { ?> John Snow <?php } ?></h4>
+                          <h4 class="mb-0 text-sm"><?php if (isset($_SESSION['login'])) {
+                                                      echo 'Admin';
+                                                    } else { ?> John Snow <?php } ?></h4>
                         </div>
                         <div class="text-right text-muted">
                           <small>3 hrs ago</small>
@@ -203,7 +215,9 @@
                   <img alt="Image placeholder" src="assets/img/theme/team-4.jpg">
                 </span>
                 <div class="media-body  ml-2  d-none d-lg-block">
-                  <span class="mb-0 text-sm  font-weight-bold"><?php if (isset($_SESSION['login'])) { echo 'Admin'; } else { ?> John Snow <?php } ?></span>
+                  <span class="mb-0 text-sm  font-weight-bold"><?php if (isset($_SESSION['login'])) {
+                                                                  echo 'Admin';
+                                                                } else { ?> John Snow <?php } ?></span>
                 </div>
               </div>
             </a>

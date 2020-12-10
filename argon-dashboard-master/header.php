@@ -32,6 +32,8 @@
   <!-- Page plugins -->
   <!-- Argon CSS -->
   <link rel="stylesheet" href="assets/css/argon.css?v=1.2.0" type="text/css">
+  <!-- Data Table -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
 </head>
 
 <body>
@@ -50,55 +52,12 @@
           <!-- Nav items -->
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" href="examples/dashboard.html">
+              <a class="nav-link active" href="#">
                 <i class="ni ni-tv-2 text-primary"></i>
                 <span class="nav-link-text">Dashboard</span>
               </a>
             </li>
-
-            
-            <!-- <ul class="navbar-nav align-items-center  ml-auto ml-md-0 "> -->
-          <li class="nav-item">
-            <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <!-- <div class="media align-items-center"> -->
-                <!-- <span class="avatar avatar-sm rounded-circle"> -->
-                  <!-- <img alt="Image placeholder" src="assets/img/theme/team-4.jpg"> -->
-                <!-- </span> -->
-                <!-- <div class="media-body  ml-2  d-none d-lg-block"> -->
-                  <span class="nav-link-text"><h6>Products</h6></span>
-                <!-- </div> -->
-              <!-- </div> -->
-            </a>
-            <div class="dropdown-menu  dropdown-menu">
-              <!-- <div class="dropdown-header noti-title">
-                <h6 class="text-overflow m-0">Welcome!</h6>
-              </div> -->
-              <a href="#!" class="dropdown-item">
-                <i class="ni ni-single-02"></i>
-                <span>My profile</span>
-              </a>
-              <a href="#!" class="dropdown-item">
-                <i class="ni ni-settings-gear-65"></i>
-                <span>Settings</span>
-              </a>
-              <a href="#!" class="dropdown-item">
-                <i class="ni ni-calendar-grid-58"></i>
-                <span>Activity</span>
-              </a>
-              <a href="#!" class="dropdown-item">
-                <i class="ni ni-support-16"></i>
-                <span>Support</span>
-              </a>
-              <!-- <div class="dropdown-divider"></div>
-              <a href="../login.php?logout=1" class="dropdown-item">
-                <i class="ni ni-user-run"></i>
-                <span>Logout</span> -->
-              </a>
-            </div>
-          </li>
-        <!-- </ul> -->
-
-
+            <!--
             <li class="nav-item">
               <a class="nav-link" href="examples/icons.html">
                 <i class="ni ni-planet text-orange"></i>
@@ -140,45 +99,180 @@
                 <i class="ni ni-send text-dark"></i>
                 <span class="nav-link-text">Upgrade</span>
               </a>
-            </li>
-          </ul>
-          <!-- Divider -->
-          <hr class="my-3">
-          <!-- Heading -->
-          <h6 class="navbar-heading p-0 text-muted">
-            <span class="docs-normal">Documentation</span>
-          </h6>
-          <!-- Navigation -->
-          <ul class="navbar-nav mb-md-3">
+            </li> -->
             <li class="nav-item">
-              <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/getting-started/overview.html" target="_blank">
-                <i class="ni ni-spaceship"></i>
-                <span class="nav-link-text">Getting started</span>
+              <a class="nav-link active" href="#products" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="products">
+                <i class="ni ni-shop text-orange"></i>
+                <span class="nav-link-text">
+                  <h4>Products</h4>
+                </span>
               </a>
+              <div class="collapse" id="products">
+                <ul class="nav nav-sm flex-column">
+                  <li class="nav-item">
+                    <a href="createcategory.php" class="nav-link">
+                      <!-- <span class="sidenav-mini-icon"> D </span> -->
+                      <span class="sidenav-normal"> Create Category </span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="addproduct.php" class="nav-link">
+                      <!-- <span class="sidenav-mini-icon"> A </span> -->
+                      <span class="sidenav-normal"> Add Product </span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="javascript:;" class="nav-link">
+                      <!-- <span class="sidenav-mini-icon"> A </span> -->
+                      <span class="sidenav-normal"> View Products </span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="javascript:;" class="nav-link">
+                      <!-- <span class="sidenav-mini-icon"> A </span> -->
+                      <span class="sidenav-normal"> Create New Offers </span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/foundation/colors.html" target="_blank">
-                <i class="ni ni-palette"></i>
-                <span class="nav-link-text">Foundation</span>
+              <a class="nav-link active" href="#orders" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="orders">
+                <i class="ni ni-collection text-dark"></i>
+                <span class="nav-link-text">
+                  <h4>Orders</h4>
+                </span>
               </a>
+              <div class="collapse" id="orders">
+                <ul class="nav nav-sm flex-column">
+                  <li class="nav-item">
+                    <a href="javascript:;" class="nav-link">
+                      <!-- <span class="sidenav-mini-icon"> D </span> -->
+                      <span class="sidenav-normal"> Pending Orders </span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="javascript:;" class="nav-link">
+                      <!-- <span class="sidenav-mini-icon"> A </span> -->
+                      <span class="sidenav-normal"> Completed Orders </span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="javascript:;" class="nav-link">
+                      <!-- <span class="sidenav-mini-icon"> A </span> -->
+                      <span class="sidenav-normal"> Cancelled Orders </span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="javascript:;" class="nav-link">
+                      <!-- <span class="sidenav-mini-icon"> A </span> -->
+                      <span class="sidenav-normal"> Generate Invoice </span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/components/alerts.html" target="_blank">
-                <i class="ni ni-ui-04"></i>
-                <span class="nav-link-text">Components</span>
+              <a class="nav-link active" href="#services" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="services">
+                <i class="ni ni-delivery-fast text-green"></i>
+                <span class="nav-link-text">
+                  <h4>Services</h4>
+                </span>
               </a>
+              <div class="collapse" id="services">
+                <ul class="nav nav-sm flex-column">
+                  <li class="nav-item">
+                    <a href="javascript:;" class="nav-link">
+                      <!-- <span class="sidenav-mini-icon"> D </span> -->
+                      <span class="sidenav-normal"> Active Services </span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="javascript:;" class="nav-link">
+                      <!-- <span class="sidenav-mini-icon"> A </span> -->
+                      <span class="sidenav-normal"> Expired Services </span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/plugins/charts.html" target="_blank">
-                <i class="ni ni-chart-pie-35"></i>
-                <span class="nav-link-text">Plugins</span>
+              <a class="nav-link active" href="#users" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="users">
+                <i class="ni ni-single-02 text-yellow"></i>
+                <span class="nav-link-text">
+                  <h4>Users</h4>
+                </span>
               </a>
+              <div class="collapse" id="users">
+                <ul class="nav nav-sm flex-column">
+                  <li class="nav-item">
+                    <a href="javascript:;" class="nav-link">
+                      <!-- <span class="sidenav-mini-icon"> D </span> -->
+                      <span class="sidenav-normal"> All User List </span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="javascript:;" class="nav-link">
+                      <!-- <span class="sidenav-mini-icon"> A </span> -->
+                      <span class="sidenav-normal"> Create New User </span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link active active-pro" href="examples/upgrade.html">
-                <i class="ni ni-send text-dark"></i>
-                <span class="nav-link-text">Upgrade to PRO</span>
+              <a class="nav-link active" href="#blog" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="blog">
+                <i class="ni ni-bullet-list-67 text-info"></i>
+                <span class="nav-link-text">
+                  <h4>Blog</h4>
+                </span>
               </a>
+              <div class="collapse" id="blog">
+                <ul class="nav nav-sm flex-column">
+                  <li class="nav-item">
+                    <a href="javascript:;" class="nav-link">
+                      <!-- <span class="sidenav-mini-icon"> D </span> -->
+                      <span class="sidenav-normal"> Add New Blog </span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="javascript:;" class="nav-link">
+                      <!-- <span class="sidenav-mini-icon"> A </span> -->
+                      <span class="sidenav-normal"> View all Blogs </span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="#accounts" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="accounts">
+                <i class="ni ni-settings-gear-65 text-red"></i>
+                <span class="nav-link-text">
+                  <h4>Accounts</h4>
+                </span>
+              </a>
+              <div class="collapse" id="accounts">
+                <ul class="nav nav-sm flex-column">
+                  <li class="nav-item">
+                    <a href="javascript:;" class="nav-link">
+                      <!-- <span class="sidenav-mini-icon"> D </span> -->
+                      <span class="sidenav-normal"> Update Company Info </span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="javascript:;" class="nav-link">
+                      <!-- <span class="sidenav-mini-icon"> A </span> -->
+                      <span class="sidenav-normal"> Change Security Ques </span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="javascript:;" class="nav-link">
+                      <!-- <span class="sidenav-mini-icon"> A </span> -->
+                      <span class="sidenav-normal"> Change Password </span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </li>
           </ul>
         </div>
