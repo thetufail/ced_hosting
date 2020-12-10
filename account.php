@@ -36,11 +36,11 @@ if (isset($_POST['signup'])) {
                             <input type="text" name="name" class="name" pattern="^[a-zA-Z]+( [a-zA-Z]+)*$" required>
                         </div>
                         <div>
-                            <span>Email Address<label>*</label></span> 
+                            <span>Email Address<label>*</label></span>
                             <input type="email" name="email" class="email" pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" title="yourname@example.com" required>
                         </div>
                         <div>
-                        <!-- ^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,4}$ -->
+                            <!-- ^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,4}$ -->
                             <span>Mobile<label>*</label></span>
                             <input type="text" name="mobno" class="mobno" pattern="(^0?([1-9]{1})([0-9]{9}))" required>
                         </div>

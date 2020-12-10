@@ -12,7 +12,7 @@ if (isset($_POST['login'])) {
 }
 
 if (isset($_GET['logout'])) {
-    unset($_SESSION['userdata']);
+    unset($_SESSION['login']);
 }
 
 ?>

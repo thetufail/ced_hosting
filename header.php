@@ -80,7 +80,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li><a href="blog.php">Blog</a></li>
                             <li><a href="contact.php">Contact</a></li>
                             <li><a href="#">Cart <i class="fa fa-shopping-cart"></i></a></li>
-                            <?php if (isset($_SESSION['userdata'])) { ?>
+                            <?php if (isset($_SESSION['login'])) { ?>
                                 <li><a href="login.php?logout=1">Logout</a></li>
                             <?php } else { ?>
                                 <li><a href="login.php">Login</a></li>

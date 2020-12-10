@@ -28,10 +28,12 @@ class User
             while ($row = $result->fetch_assoc()) {
                 // echo $sql;
                 if (($row['email_approved'] == 1 || $row['phone_approved'] == 1) && $row['active'] == 1 && $row['is_admin'] == 0 && $row['password'] == $password) {
-                    $_SESSION['userdata'] = array('id' => $row['id'], 'email' => $row['email'], 'name' => $row['name'], 'mobile' => $row['mobile'], 'email_approved' => $row['email_approved'], 'phone_approved' => $row['phone_approved'], 'active' => $row['active'], 'is_admin' => $row['is_admin'], 'sign_up_date' => $row['sign_up_date'], );
+                    $_SESSION['login'] = array('id' => $row['id'], 'email' => $row['email'], 'name' => $row['name'], 'mobile' => $row['mobile'], 'email_approved' => $row['email_approved'], 'phone_approved' => $row['phone_approved'], 'active' => $row['active'], 'is_admin' => $row['is_admin'], 'sign_up_date' => $row['sign_up_date'], );
                     ?><script>alert('Yes');</script>
-                    <!-- echo $_SESSION; -->
                     <?php
+                } else if($row['is_admin'] == 1) {
+                    $_SESSION['login'] = array('id' => $row['id'], 'email' => $row['email'], 'name' => $row['name'], 'mobile' => $row['mobile'], 'email_approved' => $row['email_approved'], 'phone_approved' => $row['phone_approved'], 'active' => $row['active'], 'is_admin' => $row['is_admin'], 'sign_up_date' => $row['sign_up_date'], );
+                    header('Location: argon-dashboard-master/index.php');
                 }
             }
         }
@@ -60,7 +62,7 @@ class User
             $mailer->Host = 'ssl://smtp.gmail.com';
             $mailer->SMTPAuth = true;
             $mailer->Username = 'neverlikebefore01@gmail.com';
-            $mailer->Password = 'ctrlaltmp4';
+            $mailer->Password = '';
             $mailer->SMTPSecure = 'tls';
             $mailer->Port = 465;
 
