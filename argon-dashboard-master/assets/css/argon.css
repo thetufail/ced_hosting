@@ -29838,3 +29838,10 @@ input.datetimepicker[data-color='yellow'] + .bootstrap-datetimepicker-widget.dro
 {
     background: transparent;
 }
+
+.form-control-label .comp {
+    color: red;
+}
+.sthr {
+    height: 10px;
+}

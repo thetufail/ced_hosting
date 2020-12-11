@@ -31,7 +31,7 @@
   <link rel="stylesheet" href="assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
   <!-- Page plugins -->
   <!-- Argon CSS -->
-  <link rel="stylesheet" href="assets/css/argon.css?v=1.2.0" type="text/css">
+  <link rel="stylesheet" href="assets/css/argon.css" type="text/css">
   <!-- Data Table -->
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
 </head>
@@ -122,7 +122,7 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="javascript:;" class="nav-link">
+                    <a href="viewproduct.php" class="nav-link">
                       <!-- <span class="sidenav-mini-icon"> A </span> -->
                       <span class="sidenav-normal"> View Products </span>
                     </a>

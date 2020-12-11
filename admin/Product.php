@@ -25,5 +25,32 @@ class Product
         $conn->query($sql);
     }
 
-    
+    function add_product_description($prod_id, $description, $mon_price, $annual_price, $sku, $conn)
+    {
+        $sql = "INSERT INTO `tbl_product_description` (`prod_id`, `description`, `mon_price`, `annual_price`, `sku`) VALUES ('" . $prod_id . "', '" . $description . "', '" . $mon_price . "', '" . $annual_price . "', '" . $sku . "')";
+        $conn->query($sql);
+    }
+
+    function get_last_id($conn)
+    {
+        $sql = "SELECT MAX(`id`) FROM `tbl_product`";
+        $result = $conn->query($sql);
+        if ($result == true) {
+            $last_id = $result->fetch_array()[0] ?? '';;
+            return $last_id;
+        }
+    }
+
+    function view_products($conn)
+    {
+        $a = array();
+        $sql = "SELECT * FROM `tbl_product` INNER JOIN `tbl_product_description` ON `tbl_product`.id=`tbl_product_description`.`prod_id` WHERE `prod_parent_id` ";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                array_push($a, $row);
+            }
+            return $a;
+        }
+    }
 }

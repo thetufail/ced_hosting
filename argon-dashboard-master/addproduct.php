@@ -1,4 +1,8 @@
 <?php session_start(); ?>
+<?php
+
+
+?>
 <?php require_once '../admin/Product.php'; ?>
 <?php
 
@@ -6,12 +10,31 @@ if (isset($_GET['logout']) && $_GET['logout'] != null) {
     unset($_SESSION['login']);
 }
 
-if (isset($_POST['addcategory']) && $_POST['addcategory'] != null) {
-    $prod_name = (isset($_POST['subcat']) && $_POST['subcat'] != null) ? $_POST['subcat'] : '';
+if (isset($_POST['createcategory']) && $_POST['createcategory'] != null) {
+    $prod_parent_id = (isset($_POST['prod_parent_id']) && $_POST['prod_parent_id'] != null) ? $_POST['prod_parent_id'] : '';
+    $prod_name = (isset($_POST['prod_name']) && $_POST['prod_name'] != null) ? $_POST['prod_name'] : '';
     $link = isset($_POST['link']) ? $_POST['link'] : '';
     $prod_launch_date = date("Y-m-d h:i:s");
-    $add_subcategory = new Product();
-    $add_subcategory->add_subcategory(1, $prod_name, $link, 1, $prod_launch_date, $db->conn);
+    $mon_price = (isset($_POST['mon_price']) && $_POST['mon_price'] != null) ? $_POST['mon_price'] : '';
+    $annual_price = (isset($_POST['annual_price']) && $_POST['annual_price'] != null) ? $_POST['annual_price'] : '';
+    $sku = (isset($_POST['sku']) && $_POST['sku'] != null) ? $_POST['sku'] : '';
+    $web_space = (isset($_POST['web_space']) && $_POST['web_space'] != null) ? $_POST['web_space'] : '';
+    $bandwidth = (isset($_POST['bandwidth']) && $_POST['bandwidth'] != null) ? $_POST['bandwidth'] : '';
+    $free_domain = (isset($_POST['free_domain']) && $_POST['free_domain'] != null) ? $_POST['free_domain'] : '';
+    $langsupport = (isset($_POST['langsupport']) && $_POST['langsupport'] != null) ? $_POST['langsupport'] : '';
+    $mailbox = (isset($_POST['mailbox']) && $_POST['mailbox'] != null) ? $_POST['mailbox'] : '';
+    $prod_name = (isset($_POST['prod_name']) && $_POST['prod_name'] != null) ? $_POST['prod_name'] : '';
+    $features = array('web_space' => $web_space, 'bandwidth' => $bandwidth, 'free_domain' => $free_domain, 'langsupport' => $langsupport,  'mailbox' => $mailbox);
+    // array_push($features, $web_space);
+    // array_push($features, $bandwidth);
+    // array_push($features, $free_domain);
+    // array_push($features, $langsupport);
+    // array_push($features, $mailbox);
+    $description = json_encode($features);
+    $add_product = new Product();
+    $add_product->add_subcategory($prod_parent_id, $prod_name, $link, 1, $prod_launch_date, $db->conn);
+    $last_id_as_prod_parent_id = $add_product->get_last_id($db->conn);
+    $add_product->add_product_description($last_id_as_prod_parent_id, $description, $mon_price, $annual_price, $sku, $db->conn);
 }
 
 ?>
@@ -294,73 +317,104 @@ if (isset($_POST['addcategory']) && $_POST['addcategory'] != null) {
         <div class="row">
             <div class="col-xl-12">
                 <div class="card">
-                    <div class="card-header border-top-10">
+                    <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col">
-                                <div class="h1">Create New Product</div>
-                                <div class="h3">Enter Product Details</div>
+                                <div class="h1 text-dark">Create New Product</div>
+                                <div class="h4 text-gray">Enter Product Details</div>
                             </div>
-                            <div class="col text-right">
+                            <!-- <div class="col text-right">
                                 <a href="#!" class="btn btn-sm btn-primary">See all</a>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <form method="POST">
-                        <div class="form-group px-4">
+                        <div class="form-group p-4 mb-0">
                             <div class="form-group">
-                                <label for="exampleFormControlSelect1" class="form-control-label">Select Product Category</label>
-                                <select class="form-control" id="exampleFormControlSelect1">
+                                <label for="exampleFormControlSelect1" class="form-control-label text-dark">Select Product Category <span class="comp">*</span></label>
+                                <select name="prod_parent_id" class="form-control" id="exampleFormControlSelect1">
                                     <option>Please Select</option>
                                     <?php $show_categories = new Product(); ?>
                                     <?php $result = $show_categories->show_category($db->conn); ?>
                                     <?php foreach ($result as $key => $value) { ?>
-                                        <!-- <input type="hidden" name=<?php echo $value['prod_parent_id']; ?> value=<?php echo $value['prod_parent_id']; ?>> -->
-                                        <option name=<?php echo $value['prod_parent_id']; ?> value=<?php echo $value['prod_name']; ?>><?php echo $value['prod_name']; ?></option>
+                                        <option value=<?php echo $value['id']; ?>><?php echo $value['prod_name']; ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Enter Product Name</label>
-                                <input class="form-control" type="text" name="subcat" id="example-text-input" required>
+                                <label for="example-text-input" class="form-control-label text-dark">Enter Product Name <span class="comp">*</span></label>
+                                <input class="form-control" type="text" name="prod_name" id="example-text-input" required>
                             </div>
                             <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Page URL</label>
-                                <input class="form-control" type="text" name="subcat" id="example-text-input" required>
+                                <label for="example-text-input" class="form-control-label text-dark">Page URL </label>
+                                <input class="form-control" type="text" name="link" id="example-text-input">
+                            </div>
+                            <hr class="sthr">
+                            <!-- <div class="card-header"> -->
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <div class="h2 text-dark">Product Description</div>
+                                    <div class="h4 text-gray">Enter Product Description Below</div>
+                                    <hr>
+                                </div>
+                                <!-- <div class="col text-right">
+                                        <a href="#!" class="btn btn-sm btn-primary">See all</a>
+                                    </div> -->
+                            </div>
+                            <!-- </div> -->
+                            <div class="form-group">
+                                <label for="example-text-input" class="form-control-label text-dark">Enter Monthly Price <span class="comp">*</span></label>
+                                <input class="form-control" type="text" name="mon_price" id="example-text-input" required>
+                                <p class="h6 py-2 text-gray">This would be monthly Plan</p>
                             </div>
                             <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Enter Monthly Price</label>
-                                <input class="form-control" type="text" name="subcat" id="example-text-input" required>
+                                <label for="example-text-input" class="form-control-label text-dark">Enter Annual Price <span class="comp">*</span></label>
+                                <input class="form-control" type="text" name="annual_price" id="example-text-input" required>
+                                <p class="h6 py-2 text-gray">This would be Annual Price</p>
                             </div>
                             <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Enter Annual Price</label>
-                                <input class="form-control" type="text" name="subcat" id="example-text-input" required>
+                                <label for="example-text-input" class="form-control-label text-dark">SKU <span class="comp">*</span></label>
+                                <input class="form-control" type="text" name="sku" id="example-text-input" required>
+                            </div>
+                            <hr>
+                            <!-- <div class="card-header"> -->
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <div class="h2 text-dark">Features</div>
+                                </div>
+                                <!-- <div class="col text-right">
+                                        <a href="#!" class="btn btn-sm btn-primary">See all</a>
+                                    </div> -->
+                            </div>
+                            <!-- </div> -->
+                            <hr>
+                            <div class="form-group">
+                                <label for="example-text-input" class="form-control-label text-dark">Web Space (in GB) <span class="comp">*</span></label>
+                                <input class="form-control" type="text" name="web_space" id="example-text-input" required>
+                                <p class="h6 py-2 text-gray">Enter 0.5 for 512MB</p>
                             </div>
                             <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">SKU</label>
-                                <input class="form-control" type="text" name="subcat" id="example-text-input" required>
+                                <label for="example-text-input" class="form-control-label text-dark">Bandwidth (in GB) <span class="comp">*</span></label>
+                                <input class="form-control" type="text" name="bandwidth" id="example-text-input" required>
+                                <p class="h6 py-2 text-gray">Enter 0.5 for 512MB</p>
                             </div>
                             <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Web Space (in GB)</label>
-                                <input class="form-control" type="text" name="subcat" id="example-text-input" required>
+                                <label for="example-text-input" class="form-control-label text-dark">Free Domain <span class="comp">*</span></label>
+                                <input class="form-control" type="text" name="free_domain" id="exampl e-text-input" required>
+                                <p class="h6 py-2 text-gray">Enter 0 if no domain available in this service</p>
                             </div>
                             <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Bandwidth (in GB)</label>
-                                <input class="form-control" type="text" name="subcat" id="example-text-input" required>
+                                <label for="example-text-input" class="form-control-label text-dark">Language/ Technology Support <span class="comp">*</span></label>
+                                <input class="form-control" type="text" name="langsupport" id="example-text-input" required>
+                                <p class="h6 py-2 text-gray">Separate by (,) Ex: PHP, MySQL, MongoDB</p>
                             </div>
                             <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Free Domain</label>
-                                <input class="form-control" type="text" name="subcat" id="example-text-input" required>
+                                <label for="example-text-input" class="form-control-label text-dark">Mailbox <span class="comp">*</span></label>
+                                <input class="form-control" type="text" name="mailbox" id="example-text-input" required>
+                                <p class="h6 py-2 text-gray">Enter Number of mailbox will be provided, enter 0 if none</p>
                             </div>
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Language/ Technology Support</label>
-                                <input class="form-control" type="text" name="subcat" id="example-text-input" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Mailbox</label>
-                                <input class="form-control" type="text" name="subcat" id="example-text-input" required>
-                            </div>
-                            <div class="form-group text-center">
-                                <input type="submit" name="addcategory" value="Create Now" class="btn btn-default ">
+                            <div class="form-group mb-0 text-center">
+                                <input type="submit" name="createcategory" value="Create Now" class="btn btn-default ">
                             </div>
                         </div>
                     </form>

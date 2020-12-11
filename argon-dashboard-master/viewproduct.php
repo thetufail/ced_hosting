@@ -297,42 +297,6 @@ if (isset($_POST['addcategory']) && $_POST['addcategory'] != null) {
                     <div class="card-header border-0">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h3 class="mb-0">Create Category</h3>
-                            </div>
-                            <div class="col text-right">
-                                <a href="#!" class="btn btn-sm btn-primary">See all</a>
-                            </div>
-                        </div>
-                    </div>
-                    <form method="POST">
-                        <div class="form-group px-4">
-                            <label for="exampleFormControlSelect1" class="form-control-label">Category</label>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">@</span>
-                                </div>
-                                <input type="text" value="Hosting" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" readonly disabled>
-                            </div>
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Sub-Category</label>
-                                <input class="form-control" type="text" name="subcat" id="example-text-input" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Link</label>
-                                <input class="form-control" type="text" name="link" id="example-text-input">
-                            </div>
-                            <input type="submit" name="addcategory" value="Add Category" class="btn btn-default">
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xl-12">
-                <div class="card">
-                    <div class="card-header border-0">
-                        <div class="row align-items-center">
-                            <div class="col">
                                 <h3 class="mb-0">Categories</h3>
                             </div>
                             <div class="col text-right">
@@ -344,18 +308,27 @@ if (isset($_POST['addcategory']) && $_POST['addcategory'] != null) {
                         <table id="categoryTable" class="display table-flush justify-content-between p-4">
                             <thead>
                                 <tr>
-                                <th>Id</th>
+                                    <th>Id</th>
                                     <th>Product Parent Id</th>
-                                    <th>Product Name</th>
-                                    <th>Page Link</th>
+                                    <th>Product Category</th>
+                                    <th>Page URL</th>
                                     <th>Product Availability</th>
                                     <th>Product Launch Date</th>
+                                    <th>Product Id</th>
+                                    <th>Enter Monthly Price</th>
+                                    <th>Enter Annual Price</th>
+                                    <th>SKU</th>
+                                    <th>Web Space (in GB)</th>
+                                    <th>Bandwidth (in GB)</th>
+                                    <th>Free Domain</th>
+                                    <th>Language / Technology Support</th>
+                                    <th>Mailbox</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $show_categories = new Product(); ?>
-                                <?php $result = $show_categories->show_category($db->conn); ?>
+                                <?php $view_products = new Product(); ?>
+                                <?php $result = $view_products->view_products($db->conn); ?>
                                 <?php foreach ($result as $key => $value) { ?>
                                     <tr>
                                         <input type="hidden" name=<?php echo $value['prod_parent_id']; ?> value=<?php echo $value['prod_parent_id']; ?>>
@@ -368,9 +341,23 @@ if (isset($_POST['addcategory']) && $_POST['addcategory'] != null) {
                                         <?php } else { ?>
                                             <?php $availability = 'Unavailable'; ?>
                                         <?php } ?>
-                                        <td><?php echo $value['prod_available']; ?></td>
+                                        <td><?php echo $availability; ?></td>
                                         <td><?php echo $value['prod_launch_date']; ?></td>
-                                        <td><?php echo $value['id']; ?><?php echo $value['id']; ?><?php echo $value['id']; ?></td>
+                                        <!-- <td><?php echo $value['id']; ?><?php echo $value['id']; ?><?php echo $value['id']; ?></td> -->
+                                        <td><?php echo $value['prod_id']; ?></td>
+                                        <td><?php echo $value['mon_price']; ?></td>
+                                        <td><?php echo $value['annual_price']; ?></td>
+                                        <td><?php echo $value['sku']; ?></td>
+                                        <?php $description = json_decode($value['description']); ?>
+                                        <?php foreach ($description as $k => $v) { ?>
+                                            <td><?php echo $v; ?></td>
+                                        <?php } ?>
+                                        <?php ?>
+                                        <?php ?>
+                                        <?php ?>
+                                        <?php ?>
+                                        <?php ?>
+                                        <?php ?>
                                     </tr>
                                 <?php } ?>
                             </tbody>
