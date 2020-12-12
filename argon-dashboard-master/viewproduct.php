@@ -297,15 +297,12 @@ if (isset($_POST['addcategory']) && $_POST['addcategory'] != null) {
                     <div class="card-header border-0">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h3 class="mb-0">Categories</h3>
-                            </div>
-                            <div class="col text-right">
-                                <a href="#!" class="btn btn-sm btn-primary">See all</a>
+                                <div class="h1 text-dark">Products</div>
                             </div>
                         </div>
                     </div>
                     <div class="table-responsive pb-4">
-                        <table id="categoryTable" class="display table-flush justify-content-between p-4">
+                        <table id="productsTable" class="table table-bordered table-striped p-4">
                             <thead>
                                 <tr>
                                     <th>Id</th>
@@ -331,7 +328,7 @@ if (isset($_POST['addcategory']) && $_POST['addcategory'] != null) {
                                 <?php $result = $view_products->view_products($db->conn); ?>
                                 <?php foreach ($result as $key => $value) { ?>
                                     <tr>
-                                        <input type="hidden" name=<?php echo $value['prod_parent_id']; ?> value=<?php echo $value['prod_parent_id']; ?>>
+                                        <input type="hidden" name=<?php echo $value['prod_id'];  ?> id="id_for_deletion" value=<?php echo $value['prod_id']; ?>>
                                         <td><?php echo $value['id']; ?></td>
                                         <td><?php echo $value['prod_parent_id']; ?></td>
                                         <td><?php echo $value['prod_name']; ?></td>
@@ -344,7 +341,9 @@ if (isset($_POST['addcategory']) && $_POST['addcategory'] != null) {
                                         <td><?php echo $availability; ?></td>
                                         <td><?php echo $value['prod_launch_date']; ?></td>
                                         <!-- <td><?php echo $value['id']; ?><?php echo $value['id']; ?><?php echo $value['id']; ?></td> -->
-                                        <td><?php echo $value['prod_id']; ?></td>
+                                        <?php $view_category_of_products = new Product(); ?>
+                                        <?php $result = $view_category_of_products->view_category_of_products($value['prod_parent_id'], $db->conn); ?>
+                                        <td><?php echo $result; ?></td>
                                         <td><?php echo $value['mon_price']; ?></td>
                                         <td><?php echo $value['annual_price']; ?></td>
                                         <td><?php echo $value['sku']; ?></td>
@@ -352,6 +351,11 @@ if (isset($_POST['addcategory']) && $_POST['addcategory'] != null) {
                                         <?php foreach ($description as $k => $v) { ?>
                                             <td><?php echo $v; ?></td>
                                         <?php } ?>
+                                        <td>
+                                            <button id="edit"><i class="fa fa-edit" aria-hidden="true"></i></button>
+                                            <button id="delete"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                            <!-- <button id="edit"><i class="fa fa-badge" aria-hidden="true"></i></button> -->
+                                        </td>
                                         <?php ?>
                                         <?php ?>
                                         <?php ?>
@@ -385,7 +389,7 @@ if (isset($_POST['addcategory']) && $_POST['addcategory'] != null) {
 <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('#categoryTable').DataTable();
+        $('#productsTable').DataTable();
     });
 </script>
 </body>

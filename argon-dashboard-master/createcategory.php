@@ -297,7 +297,7 @@ if (isset($_POST['addcategory']) && $_POST['addcategory'] != null) {
                     <div class="card-header border-0">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h3 class="mb-0">Create Category</h3>
+                                <div class="h1 text-dark">Create Category</div>
                             </div>
                             <div class="col text-right">
                                 <a href="#!" class="btn btn-sm btn-primary">See all</a>
@@ -309,7 +309,7 @@ if (isset($_POST['addcategory']) && $_POST['addcategory'] != null) {
                             <label for="exampleFormControlSelect1" class="form-control-label">Category</label>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">@</span>
+                                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-lock" aria-hidden="true"></i></span>
                                 </div>
                                 <input type="text" value="Hosting" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" readonly disabled>
                             </div>
@@ -344,7 +344,7 @@ if (isset($_POST['addcategory']) && $_POST['addcategory'] != null) {
                         <table id="categoryTable" class="display table-flush justify-content-between p-4">
                             <thead>
                                 <tr>
-                                <th>Id</th>
+                                    <th>Id</th>
                                     <th>Product Parent Id</th>
                                     <th>Product Name</th>
                                     <th>Page Link</th>

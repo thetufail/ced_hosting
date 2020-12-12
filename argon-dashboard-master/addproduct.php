@@ -343,11 +343,11 @@ if (isset($_POST['createcategory']) && $_POST['createcategory'] != null) {
                             </div>
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label text-dark">Enter Product Name <span class="comp">*</span></label>
-                                <input class="form-control" type="text" name="prod_name" id="example-text-input" required>
+                                <input class="form-control" type="text" name="prod_name" id="product_name" required>
                             </div>
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label text-dark">Page URL </label>
-                                <input class="form-control" type="text" name="link" id="example-text-input">
+                                <input class="form-control" type="text" name="link" id="page_url">
                             </div>
                             <hr class="sthr">
                             <!-- <div class="card-header"> -->
@@ -364,17 +364,17 @@ if (isset($_POST['createcategory']) && $_POST['createcategory'] != null) {
                             <!-- </div> -->
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label text-dark">Enter Monthly Price <span class="comp">*</span></label>
-                                <input class="form-control" type="text" name="mon_price" id="example-text-input" required>
+                                <input class="form-control" type="text" name="mon_price" id="monthly_price" required>
                                 <p class="h6 py-2 text-gray">This would be monthly Plan</p>
                             </div>
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label text-dark">Enter Annual Price <span class="comp">*</span></label>
-                                <input class="form-control" type="text" name="annual_price" id="example-text-input" required>
+                                <input class="form-control" type="text" name="annual_price" id="annual_price" required>
                                 <p class="h6 py-2 text-gray">This would be Annual Price</p>
                             </div>
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label text-dark">SKU <span class="comp">*</span></label>
-                                <input class="form-control" type="text" name="sku" id="example-text-input" required>
+                                <input class="form-control" type="text" name="sku" id="sku" required>
                             </div>
                             <hr>
                             <!-- <div class="card-header"> -->
@@ -390,27 +390,27 @@ if (isset($_POST['createcategory']) && $_POST['createcategory'] != null) {
                             <hr>
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label text-dark">Web Space (in GB) <span class="comp">*</span></label>
-                                <input class="form-control" type="text" name="web_space" id="example-text-input" required>
+                                <input class="form-control" type="text" name="web_space" id="web_space" required>
                                 <p class="h6 py-2 text-gray">Enter 0.5 for 512MB</p>
                             </div>
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label text-dark">Bandwidth (in GB) <span class="comp">*</span></label>
-                                <input class="form-control" type="text" name="bandwidth" id="example-text-input" required>
+                                <input class="form-control" type="text" name="bandwidth" id="bandwidth" required>
                                 <p class="h6 py-2 text-gray">Enter 0.5 for 512MB</p>
                             </div>
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label text-dark">Free Domain <span class="comp">*</span></label>
-                                <input class="form-control" type="text" name="free_domain" id="exampl e-text-input" required>
+                                <input class="form-control" type="text" name="free_domain" id="free_domain" required>
                                 <p class="h6 py-2 text-gray">Enter 0 if no domain available in this service</p>
                             </div>
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label text-dark">Language/ Technology Support <span class="comp">*</span></label>
-                                <input class="form-control" type="text" name="langsupport" id="example-text-input" required>
+                                <input class="form-control" type="text" name="langsupport" id="language_support" required>
                                 <p class="h6 py-2 text-gray">Separate by (,) Ex: PHP, MySQL, MongoDB</p>
                             </div>
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label text-dark">Mailbox <span class="comp">*</span></label>
-                                <input class="form-control" type="text" name="mailbox" id="example-text-input" required>
+                                <input class="form-control" type="text" name="mailbox" id="mailbox" required>
                                 <p class="h6 py-2 text-gray">Enter Number of mailbox will be provided, enter 0 if none</p>
                             </div>
                             <div class="form-group mb-0 text-center">
@@ -485,6 +485,7 @@ if (isset($_POST['createcategory']) && $_POST['createcategory'] != null) {
 <script src="assets/js/argon.js?v=1.2.0"></script>
 <!-- Data Table -->
 <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="assets/js/admin_validations.js"></script>
 <script>
     $(document).ready(function() {
         $('#categoryTable').DataTable();

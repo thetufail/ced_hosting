@@ -36,7 +36,7 @@ class Product
         $sql = "SELECT MAX(`id`) FROM `tbl_product`";
         $result = $conn->query($sql);
         if ($result == true) {
-            $last_id = $result->fetch_array()[0] ?? '';;
+            $last_id = $result->fetch_array()[0] ?? '';
             return $last_id;
         }
     }
@@ -52,5 +52,29 @@ class Product
             }
             return $a;
         }
+    }
+
+    function view_category_of_products($prod_parent_id, $conn)
+    {
+        // $a = array();
+        $sql = "SELECT `prod_name` FROM `tbl_product` WHERE `id`= '" . $prod_parent_id . "'";
+        $result = $conn->query($sql);
+        if ($result == true) {
+            $prod_name = $result->fetch_array()[0] ?? '';
+            return $prod_name;
+        }
+    }
+
+    function delete_product($id, $conn)
+    {
+        $sql = "DELETE FROM `tbl_product_description` WHERE `id`='" . $id . "'";
+        $conn->query($sql);
+        // if ($conn->query($sql) === true) {
+        // header('Location: http://localhost/cab_booking/admin/locations.php');
+        // return;
+        // } else {
+        // echo 'not okay';
+        // echo "<br> " . $sql;
+        // }
     }
 }
