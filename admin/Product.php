@@ -67,7 +67,9 @@ class Product
 
     function delete_product($id, $conn)
     {
-        $sql = "DELETE FROM `tbl_product_description` WHERE `id`='" . $id . "'";
+        $sql = "DELETE FROM `tbl_product_description` WHERE `prod_id`='" . $id . "'";
+        $conn->query($sql);
+        $sql = "DELETE FROM `tbl_product` WHERE `id`='" . $id . "'";
         $conn->query($sql);
         // if ($conn->query($sql) === true) {
         // header('Location: http://localhost/cab_booking/admin/locations.php');
@@ -77,4 +79,15 @@ class Product
         // echo "<br> " . $sql;
         // }
     }
+
+    function update_tbl_product($prod_parent_id, $prod_name, $html, $prod_available, $conn) {
+        $sql = "UPDATE `tbl_product` SET `prod_parent_id`='".$prod_parent_id."', '".$prod_name."', '".$html."', '".$prod_available."',";
+        $conn->query($sql);
+    }
+
+    function update_tbl_product_description($prod_parent_id, $prod_name, $html, $prod_available, $conn) {
+        $sql = "UPDATE `tbl_product` SET `prod_parent_id`='".$prod_parent_id."', '".$prod_name."', '".$html."', '".$prod_available."',";
+        $conn->query($sql);
+    }
+    
 }

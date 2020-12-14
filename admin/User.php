@@ -1,6 +1,5 @@
 <?php
 
-session_start();
 require "vendor/autoload.php";
 require_once 'Dbcon.php';
 use PHPMailer\PHPMailer\PHPMailer;
@@ -12,8 +11,8 @@ class User
     {
         $sql = "INSERT INTO `tbl_user` (`email`,`name`,`mobile`,`email_approved`,`phone_approved`,`active`,`is_admin`,`sign_up_date`,`password`, `security_question`,`security_answer`) VALUES ('" . $email . "', '" . $name . "', '" . $mobile . "', " . $email_approved . ", " . $phone_approved . ", " . $active . ", " . $is_admin . ", '" . $sign_up_date . "', '" . $password . "', '" . $security_question . "', '" . $security_answer . "' )";
         if ($conn->query($sql) === true) {
-            // echo 'okay';
-            echo "<br> " . $sql;
+            echo 'okay';
+            // echo "<br> " . $sql;
         } else {
             echo 'not okay';
             echo "<br> " . $sql;
@@ -28,14 +27,16 @@ class User
             while ($row = $result->fetch_assoc()) {
                 // echo $sql;
                 if (($row['email_approved'] == 1 || $row['phone_approved'] == 1) && $row['active'] == 1 && $row['is_admin'] == 0 && $row['password'] == $password) {
-                    $_SESSION['userdata'] = array('id' => $row['id'], 'email' => $row['email'], 'name' => $row['name'], 'mobile' => $row['mobile'], 'email_approved' => $row['email_approved'], 'phone_approved' => $row['phone_approved'], 'active' => $row['active'], 'is_admin' => $row['is_admin'], 'sign_up_date' => $row['sign_up_date'], );
-                    ?><script>alert('Yes');</script>
+                    $_SESSION['login'] = array('id' => $row['id'], 'email' => $row['email'], 'name' => $row['name'], 'mobile' => $row['mobile'], 'email_approved' => $row['email_approved'], 'phone_approved' => $row['phone_approved'], 'active' => $row['active'], 'is_admin' => $row['is_admin'], 'sign_up_date' => $row['sign_up_date']);
+                    ?>
+                    <script>alert('Yes');</script>
                     <!-- echo $_SESSION; -->
-                    <?php
+                    <?php } else if (($row['email_approved'] == 1 || $row['phone_approved'] == 1) && $row['active'] == 1 && $row['is_admin'] == 1 && $row['password'] == $password) {
+                        $_SESSION['login'] = array('id' => $row['id'], 'email' => $row['email'], 'name' => $row['name'], 'mobile' => $row['mobile'], 'email_approved' => $row['email_approved'], 'phone_approved' => $row['phone_approved'], 'active' => $row['active'], 'is_admin' => $row['is_admin'], 'sign_up_date' => $row['sign_up_date']);
+                        header('Location:argon-dashboard-master/index.php');
                 }
             }
-        }
-        else {
+        } else {
             echo "haha";
         }
     }

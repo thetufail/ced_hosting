@@ -10,7 +10,7 @@ if (isset($_GET['logout']) && $_GET['logout'] != null) {
     unset($_SESSION['login']);
 }
 
-if (isset($_POST['createcategory']) && $_POST['createcategory'] != null) {
+if (isset($_POST['addproduct']) && $_POST['addproduct'] != null) {
     $prod_parent_id = (isset($_POST['prod_parent_id']) && $_POST['prod_parent_id'] != null) ? $_POST['prod_parent_id'] : '';
     $prod_name = (isset($_POST['prod_name']) && $_POST['prod_name'] != null) ? $_POST['prod_name'] : '';
     $html = isset($_POST['html']) ? $_POST['html'] : '';
@@ -414,7 +414,7 @@ if (isset($_POST['createcategory']) && $_POST['createcategory'] != null) {
                                 <p class="h6 py-2 text-gray">Enter Number of mailbox will be provided, enter 0 if none</p>
                             </div>
                             <div class="form-group mb-0 text-center">
-                                <input type="submit" name="createcategory" value="Create Now" class="btn btn-default ">
+                                <input type="submit" name="addproduct" value="Create Now" class="btn btn-default ">
                             </div>
                         </div>
                     </form>

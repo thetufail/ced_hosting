@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!--
 Author: W3layouts
 Author URL: http://w3layouts.com

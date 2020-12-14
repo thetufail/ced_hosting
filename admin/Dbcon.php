@@ -9,9 +9,8 @@ class Dbcon
         if ($this->conn->connect_error) {
             die("Connection failed: " . $this->conn->connect_error);
         } else {
-            echo 'connected';
+            // echo 'connected';
         }
     }
 }
-
 $db = new Dbcon();
