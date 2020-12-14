@@ -1,9 +1,9 @@
 <?php session_start(); ?>
+<?php require_once '../admin/Product.php'; ?>
 <?php
 
 
 ?>
-<?php require_once '../admin/Product.php'; ?>
 <?php
 
 if (isset($_GET['logout']) && $_GET['logout'] != null) {
@@ -13,7 +13,7 @@ if (isset($_GET['logout']) && $_GET['logout'] != null) {
 if (isset($_POST['createcategory']) && $_POST['createcategory'] != null) {
     $prod_parent_id = (isset($_POST['prod_parent_id']) && $_POST['prod_parent_id'] != null) ? $_POST['prod_parent_id'] : '';
     $prod_name = (isset($_POST['prod_name']) && $_POST['prod_name'] != null) ? $_POST['prod_name'] : '';
-    $link = isset($_POST['link']) ? $_POST['link'] : '';
+    $html = isset($_POST['html']) ? $_POST['html'] : '';
     $prod_launch_date = date("Y-m-d h:i:s");
     $mon_price = (isset($_POST['mon_price']) && $_POST['mon_price'] != null) ? $_POST['mon_price'] : '';
     $annual_price = (isset($_POST['annual_price']) && $_POST['annual_price'] != null) ? $_POST['annual_price'] : '';
@@ -32,7 +32,7 @@ if (isset($_POST['createcategory']) && $_POST['createcategory'] != null) {
     // array_push($features, $mailbox);
     $description = json_encode($features);
     $add_product = new Product();
-    $add_product->add_subcategory($prod_parent_id, $prod_name, $link, 1, $prod_launch_date, $db->conn);
+    $add_product->add_subcategory($prod_parent_id, $prod_name, $html, 1, $prod_launch_date, $db->conn);
     $last_id_as_prod_parent_id = $add_product->get_last_id($db->conn);
     $add_product->add_product_description($last_id_as_prod_parent_id, $description, $mon_price, $annual_price, $sku, $db->conn);
 }
@@ -347,7 +347,7 @@ if (isset($_POST['createcategory']) && $_POST['createcategory'] != null) {
                             </div>
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label text-dark">Page URL </label>
-                                <input class="form-control" type="text" name="link" id="page_url">
+                                <input class="form-control" type="text" name="html" id="page_url">
                             </div>
                             <hr class="sthr">
                             <!-- <div class="card-header"> -->
@@ -441,7 +441,7 @@ if (isset($_POST['createcategory']) && $_POST['createcategory'] != null) {
                                     <th>Id</th>
                                     <th>Product Parent Id</th>
                                     <th>Product Name</th>
-                                    <th>Page Link</th>
+                                    <th>Page Html</th>
                                     <th>Product Availability</th>
                                     <th>Product Launch Date</th>
                                     <th>Actions</th>
@@ -456,7 +456,7 @@ if (isset($_POST['createcategory']) && $_POST['createcategory'] != null) {
                                         <td><?php echo $value['id']; ?></td>
                                         <td><?php echo $value['prod_parent_id']; ?></td>
                                         <td><?php echo $value['prod_name']; ?></td>
-                                        <td><?php echo $value['link']; ?></td>
+                                        <td><?php echo $value['html']; ?></td>
                                         <td><?php echo $value['prod_available']; ?></td>
                                         <td><?php echo $value['prod_launch_date']; ?></td>
                                         <td><?php echo $value['id']; ?><?php echo $value['id']; ?><?php echo $value['id']; ?></td>

@@ -19,9 +19,9 @@ class Product
         }
     }
 
-    function add_subcategory($prod_parent_id, $prod_name, $link, $prod_available, $prod_launch_date, $conn)
+    function add_subcategory($prod_parent_id, $prod_name, $html, $prod_available, $prod_launch_date, $conn)
     {
-        $sql = "INSERT INTO `tbl_product` (`prod_parent_id`, `prod_name`, `link`, `prod_available`, `prod_launch_date`) VALUES ('" . $prod_parent_id . "', '" . $prod_name . "', '" . $link . "', '" . $prod_available . "', '" . $prod_launch_date . "')";
+        $sql = "INSERT INTO `tbl_product` (`prod_parent_id`, `prod_name`, `html`, `prod_available`, `prod_launch_date`) VALUES ('" . $prod_parent_id . "', '" . $prod_name . "', '" . $html . "', '" . $prod_available . "', '" . $prod_launch_date . "')";
         $conn->query($sql);
     }
 

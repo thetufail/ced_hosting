@@ -8,10 +8,10 @@ if (isset($_GET['logout']) && $_GET['logout'] != null) {
 
 if (isset($_POST['addcategory']) && $_POST['addcategory'] != null) {
     $prod_name = (isset($_POST['subcat']) && $_POST['subcat'] != null) ? $_POST['subcat'] : '';
-    $link = isset($_POST['link']) ? $_POST['link'] : '';
+    $html = isset($_POST['html']) ? $_POST['html'] : '';
     $prod_launch_date = date("Y-m-d h:i:s");
     $add_subcategory = new Product();
-    $add_subcategory->add_subcategory(1, $prod_name, $link, 1, $prod_launch_date, $db->conn);
+    $add_subcategory->add_subcategory(1, $prod_name, $html, 1, $prod_launch_date, $db->conn);
 }
 
 ?>
@@ -263,7 +263,7 @@ if (isset($_POST['addcategory']) && $_POST['addcategory'] != null) {
                     </li>
                 </ul>
             </div>
-        </div>z
+        </div>
     </nav>
     <!-- Header -->
     <!-- Header -->
@@ -318,7 +318,7 @@ if (isset($_POST['addcategory']) && $_POST['addcategory'] != null) {
                                 <input class="form-control" type="text" name="subcat" id="example-text-input" required>
                             </div>
                             <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Link</label>
+                                <label for="example-text-input" class="form-control-label">Html</label>
                                 <input class="form-control" type="text" name="link" id="example-text-input">
                             </div>
                             <input type="submit" name="addcategory" value="Add Category" class="btn btn-default">
@@ -347,7 +347,7 @@ if (isset($_POST['addcategory']) && $_POST['addcategory'] != null) {
                                     <th>Id</th>
                                     <th>Product Parent Id</th>
                                     <th>Product Name</th>
-                                    <th>Page Link</th>
+                                    <th>Page Html</th>
                                     <th>Product Availability</th>
                                     <th>Product Launch Date</th>
                                     <th>Actions</th>
@@ -362,7 +362,7 @@ if (isset($_POST['addcategory']) && $_POST['addcategory'] != null) {
                                         <td><?php echo $value['id']; ?></td>
                                         <td><?php echo $value['prod_parent_id']; ?></td>
                                         <td><?php echo $value['prod_name']; ?></td>
-                                        <td><?php echo $value['link']; ?></td>
+                                        <td><?php echo $value['html']; ?></td>
                                         <?php if ($value['prod_available'] == 1) { ?>
                                             <?php $availability = 'Available'; ?>
                                         <?php } else { ?>
