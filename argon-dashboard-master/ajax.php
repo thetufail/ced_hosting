@@ -5,7 +5,7 @@ session_start();
 $errors = array();
 // echo $id;
 
-    // -------------- CATEGORY TABLE --------------
+// -------------- CATEGORY TABLE --------------
 
 if (!empty($_POST['action']) && $_POST['action'] == 'delete_category') {
     $id = $_POST['id'];
@@ -20,12 +20,12 @@ if (!empty($_POST['action']) && $_POST['action'] == 'update_category') {
     $pname = $_POST['pname'];
     $phtml = $_POST['phtml'];
     $pavailable = $_POST['pavailable'];
-    
+
     $update_product = new Product();
     $update_product->update_tbl_product($id, $pparentid, $pname, $phtml, $pavailable, $db->conn);
 }
 
-    // -------------- PRODUCTS TABLE --------------
+// -------------- PRODUCTS TABLE --------------
 
 if (!empty($_POST['action']) && $_POST['action'] == 'delete') {
     $id = $_POST['id'];
@@ -43,13 +43,13 @@ if (!empty($_POST['action']) && $_POST['action'] == 'update') {
     $pmonprice = $_POST['pmonprice'];
     $pannualprice = $_POST['pannualprice'];
     $psku = $_POST['psku'];
-    $web_spacefeatures = $_POST['web_spacefeatures'];
-    $bandwidthfeatures = $_POST['bandwidthfeatures'];
-    $free_domainfeatures = $_POST['free_domainfeatures'];
-    $langsupportfeatures = $_POST['langsupportfeatures'];
-    $mailboxfeatures = $_POST['mailboxfeatures'];
+    $web_space = $_POST['web_space'];
+    $bandwidth = $_POST['bandwidth'];
+    $free_domain = $_POST['free_domain'];
+    $langsupport = $_POST['langsupport'];
+    $mailbox = $_POST['mailbox'];
 
-    $features = array('web_space' => $web_spacefeatures, 'bandwidth' => $bandwidthfeatures, 'free_domain' => $free_domainfeatures, 'langsupport' => $langsupportfeatures,  'mailbox' => $mailboxfeatures);
+    $features = array('web_space' => $web_space, 'bandwidth' => $bandwidth, 'free_domain' => $free_domain, 'langsupport' => $langsupport,  'mailbox' => $mailbox);
     $description = json_encode($features);
 
     $update_product = new Product();

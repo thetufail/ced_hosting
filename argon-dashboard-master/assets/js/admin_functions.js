@@ -104,8 +104,8 @@ $(document).ready(function (e) {
                 },
                 // dataType: "html",
                 success: function () {
-                    // location.ajax.reload();
-                    $('#categoryTable').reload('#categoryTable');
+                    location.reload();
+                    // $('#categoryTable').reload('#categoryTable');
                 },
                 error: function () {
                     alert("We're sorry for the inconvenience caused.");
@@ -129,11 +129,11 @@ $(document).ready(function (e) {
             var pmonprice = $(this).data("pmonprice");
             var pannualprice = $(this).data("pannualprice");
             var psku = $(this).data("psku");
-            var web_spacefeatures = $(this).data("web_spacefeatures");
-            var bandwidthfeatures = $(this).data("bandwidthfeatures");
-            var free_domainfeatures = $(this).data("free_domainfeatures");
-            var langsupportfeatures = $(this).data("langsupportfeatures");
-            var mailboxfeatures = $(this).data("mailboxfeatures");
+            var web_space = $(this).data("web_space");
+            var bandwidth = $(this).data("bandwidth");
+            var free_domain = $(this).data("free_domain");
+            var langsupport = $(this).data("langsupport");
+            var mailbox = $(this).data("mailbox");
 
             $('#prod_id').val(id);
             $('#prod_parent_id').val(pparentid);
@@ -144,11 +144,11 @@ $(document).ready(function (e) {
             $('#monthly_price').val(pmonprice);
             $('#annual_price').val(pannualprice);
             $('#sku').val(psku);
-            $('#web_space').val(web_spacefeatures);
-            $('#bandwidth').val(bandwidthfeatures);
-            $('#free_domain').val(free_domainfeatures);
-            $('#language_support').val(langsupportfeatures);
-            $('#mailbox').val(mailboxfeatures);
+            $('#web_space').val(web_space);
+            $('#bandwidth').val(bandwidth);
+            $('#free_domain').val(free_domain);
+            $('#language_support').val(langsupport);
+            $('#mailbox').val(mailbox);
         }
     });
 
@@ -162,11 +162,11 @@ $(document).ready(function (e) {
         var pmonprice = $('#monthly_price').val();
         var pannualprice = $('#annual_price').val();
         var psku = $('#sku').val();
-        var web_spacefeatures = $('#web_space').val();
-        var bandwidthfeatures = $('#bandwidth').val();
-        var free_domainfeatures = $('#free_domain').val();
-        var langsupportfeatures = $('#language_support').val();
-        var mailboxfeatures = $('#mailbox').val();
+        var web_space = $('#web_space').val();
+        var bandwidth = $('#bandwidth').val();
+        var free_domain = $('#free_domain').val();
+        var langsupport = $('#language_support').val();
+        var mailbox = $('#mailbox').val();
         console.log(pid);
         console.log(pparentid);
         console.log(pname);
@@ -175,11 +175,11 @@ $(document).ready(function (e) {
         console.log(pmonprice);
         console.log(pannualprice);
         console.log(psku);
-        console.log(web_spacefeatures);
-        console.log(bandwidthfeatures);
-        console.log(free_domainfeatures);
-        console.log(langsupportfeatures);
-        console.log(mailboxfeatures);
+        console.log(web_space);
+        console.log(bandwidth);
+        console.log(free_domain);
+        console.log(langsupport);
+        console.log(mailbox);
         var action = "update";
         if (confirm("Are you sure you want to update this record?")) {
             $.ajax({
@@ -194,11 +194,11 @@ $(document).ready(function (e) {
                     pmonprice: pmonprice,
                     pannualprice: pannualprice,
                     psku: psku,
-                    web_spacefeatures: web_spacefeatures,
-                    bandwidthfeatures: bandwidthfeatures,
-                    free_domainfeatures: free_domainfeatures,
-                    langsupportfeatures: langsupportfeatures,
-                    mailboxfeatures: mailboxfeatures,
+                    web_space: web_space,
+                    bandwidth: bandwidth,
+                    free_domain: free_domain,
+                    langsupport: langsupport,
+                    mailbox: mailbox,
                     action: action
                 },
                 dataType: "html",
@@ -225,8 +225,8 @@ $(document).ready(function (e) {
                 },
                 // dataType: "html",
                 success: function () {
-                    // location.ajax.reload();
-                    $('#productsTable').reload('#productsTable');
+                    location.reload();
+                    // $('#productsTable').reload('#productsTable');
                 },
                 error: function () {
                     alert("We're sorry for the inconvenience caused.");

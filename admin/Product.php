@@ -44,7 +44,20 @@ class Product
     function view_products($conn)
     {
         $a = array();
-        $sql = "SELECT * FROM `tbl_product` INNER JOIN `tbl_product_description` ON `tbl_product`.id=`tbl_product_description`.`prod_id` WHERE `prod_parent_id` ";
+        $sql = "SELECT * FROM `tbl_product` INNER JOIN `tbl_product_description` ON `tbl_product`.id=`tbl_product_description`.`prod_id`";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                array_push($a, $row);
+            }
+            return $a;
+        }
+    }
+
+    function view_products_catpage($id, $conn)
+    {
+        $a = array();
+        $sql = "SELECT * FROM `tbl_product` INNER JOIN `tbl_product_description` ON `tbl_product`.id=`tbl_product_description`.`prod_id` WHERE `prod_parent_id` = '".$id."'";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
