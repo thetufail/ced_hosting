@@ -15,6 +15,18 @@ $('#product_name').on('blur', function () {
     }
 });
 
+$('.subcat').on('blur', function () {
+    var email = new RegExp('^[0-9]*[A-Za-z]+[0-9]*$');
+
+    if (email.test(this.value)) {
+        $(".form-group").css("background-color", "yellow");
+        // alert('Great, you entered an E-Mail-address');
+    } else {
+        this.value = this.value.replace(this.value, '');
+        $(".form-group").css("background-color", "red");
+    }
+});
+
 $('.formfieldluggage').on('keyup', function () {
 });
 

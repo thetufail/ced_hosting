@@ -317,7 +317,7 @@ if (isset($_POST['addcategory']) && $_POST['addcategory'] != null) {
                             </div>
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">Sub-Category</label>
-                                <input class="form-control" type="text" name="subcat" id="product_name" required>
+                                <input class="form-control subcat" type="text" name="subcat" id="product_name" required>
                             </div>
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">Html</label>
@@ -364,11 +364,11 @@ if (isset($_POST['addcategory']) && $_POST['addcategory'] != null) {
                             </div>
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">Sub-Category</label>
-                                <input class="form-control" type="text" name="subcat" id="example-text-input" required>
+                                <input class="form-control subcat" type="text" name="subcat" required>
                             </div>
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">Html</label>
-                                <input class="form-control" type="text" name="link" id="example-text-input">
+                                <input class="form-control" type="text" name="link">
                             </div>
                             <input type="submit" name="addcategory" value="Add Category" class="btn btn-default">
                         </div>
@@ -455,6 +455,7 @@ if (isset($_POST['addcategory']) && $_POST['addcategory'] != null) {
 <!-- Data Table -->
 <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 <script src="assets/js/admin_functions.js"></script>
+<script src="assets/js/admin_validations.js"></script>
 <script>
     $(document).ready(function() {
         $('#categoryTable').DataTable();

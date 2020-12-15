@@ -29847,7 +29847,7 @@ input.datetimepicker[data-color='yellow'] + .bootstrap-datetimepicker-widget.dro
     height: 10px;
 }
 
-.edit, .delete {
+.edit, .delete, .edit_category, .delete_category {
     border: none;
     background-color: #fff;
 }
