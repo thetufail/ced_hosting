@@ -88,7 +88,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     </div>
                                     <a href="#">buy now</a>
                                 </div>
-                                <div class="col-md-3 linux-price">
+                                <!-- <div class="col-md-3 linux-price">
                                     <div class="linux-top">
                                         <h4>Advanced</h4>
                                     </div>
@@ -141,7 +141,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         </ul>
                                     </div>
                                     <a href="#">buy now</a>
-                                </div>
+                                </div> -->
                                 <div class="clearfix"></div>
                             </div>
                         </div>

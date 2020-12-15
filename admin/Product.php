@@ -65,6 +65,12 @@ class Product
         }
     }
 
+    function category_delete_product($id, $conn)
+    {
+        $sql = "DELETE FROM `tbl_product` WHERE `id`='" . $id . "'";
+        $conn->query($sql);
+    }
+
     function delete_product($id, $conn)
     {
         $sql = "DELETE FROM `tbl_product_description` WHERE `prod_id`='" . $id . "'";
@@ -80,14 +86,19 @@ class Product
         // }
     }
 
-    function update_tbl_product($prod_parent_id, $prod_name, $html, $prod_available, $conn) {
-        $sql = "UPDATE `tbl_product` SET `prod_parent_id`='".$prod_parent_id."', '".$prod_name."', '".$html."', '".$prod_available."',";
+    function update_tbl_product($id, $prod_parent_id, $prod_name, $html, $prod_available, $conn)
+    {
+        echo "<script>alert('Hii');</script>";
+        $sql = "UPDATE `tbl_product` SET `prod_parent_id`='" . $prod_parent_id . "', `prod_name` = '" . $prod_name . "', `html` = '" . $html . "', `prod_available` =  '" . $prod_available . "' WHERE `id` = '" . $id . "'";
+        echo $sql;
         $conn->query($sql);
     }
 
-    function update_tbl_product_description($prod_parent_id, $prod_name, $html, $prod_available, $conn) {
-        $sql = "UPDATE `tbl_product` SET `prod_parent_id`='".$prod_parent_id."', '".$prod_name."', '".$html."', '".$prod_available."',";
+    function update_tbl_product_description($prod_id, $description, $mon_price, $annual_price, $sku, $conn)
+    {
+        echo "<script>alert('Hii');</script>";
+        $sql = "UPDATE `tbl_product_description` SET `description`='" . $description . "', `mon_price` = '" . $mon_price . "', `annual_price` = '" . $annual_price . "', `sku` = '" . $sku . "' WHERE `prod_id` = '" . $prod_id . "'";
+        echo $sql;
         $conn->query($sql);
     }
-    
 }

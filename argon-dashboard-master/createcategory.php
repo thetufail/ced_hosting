@@ -291,8 +291,57 @@ if (isset($_POST['addcategory']) && $_POST['addcategory'] != null) {
     </div>
     <!-- Page content -->
     <div class="container-fluid mt--6">
-        <div class="row">
+        <div class="row form_on_update_category" style="display:none">
             <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-header border-0">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <div class="h1 text-dark">Update Category</div>
+                            </div>
+                            <div class="col text-right">
+                                <a href="#!" class="btn btn-sm btn-primary">See all</a>
+                            </div>
+                        </div>
+                    </div>
+                    <form method="POST">
+                        <div class="form-group px-4">
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1" class="form-control-label">Category</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                    </div>
+                                    <input type="text" value="Hosting" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" readonly disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="example-text-input" class="form-control-label">Sub-Category</label>
+                                <input class="form-control" type="text" name="subcat" id="product_name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="example-text-input" class="form-control-label">Html</label>
+                                <input class="form-control" type="text" name="link" id="page_html">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1" class="form-control-label text-dark">Change Availability <span class="comp">*</span></label>
+                                <select name="availability_update" class="form-control is_available" id="exampleFormControlSelect1">
+                                    <option value='1'>Available</option>
+                                    <option value='0'>Unavailable</option>
+                                </select>
+                            </div>
+                            <div class="form-group mb-0 text-center">
+                                <button type="button" name="update" class="btn btn-default update_category">Update</button>
+                            </div>
+                            <input class="form-control" type="hidden" id="id" required>
+                            <input id="prod_parent_id" class="form-control" type="hidden" required>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 createnewcategory">
                 <div class="card">
                     <div class="card-header border-0">
                         <div class="row align-items-center">
@@ -341,7 +390,7 @@ if (isset($_POST['addcategory']) && $_POST['addcategory'] != null) {
                         </div>
                     </div>
                     <div class="table-responsive pb-4">
-                        <table id="categoryTable" class="display table-flush justify-content-between p-4">
+                        <table id="categoryTable" class="table table-bordered table-striped p-4">
                             <thead>
                                 <tr>
                                     <th>Id</th>
@@ -368,9 +417,18 @@ if (isset($_POST['addcategory']) && $_POST['addcategory'] != null) {
                                         <?php } else { ?>
                                             <?php $availability = 'Unavailable'; ?>
                                         <?php } ?>
-                                        <td><?php echo $value['prod_available']; ?></td>
+                                        <?php if ($value['prod_available'] == 1) { ?>
+                                            <?php $availability = 'Available'; ?>
+                                        <?php } else { ?>
+                                            <?php $availability = 'Unavailable'; ?>
+                                        <?php } ?>
+                                        <td><?php echo $availability; ?></td>
                                         <td><?php echo $value['prod_launch_date']; ?></td>
-                                        <td><?php echo $value['id']; ?><?php echo $value['id']; ?><?php echo $value['id']; ?></td>
+                                        <td>
+                                            <button type="button" name="edit" class="edit_category" id=<?php echo $value['id']; ?> data-pid=<?php echo $value['id']; ?> data-pparentid=<?php echo $value['prod_parent_id']; ?> data-pname="<?php echo $value['prod_name']; ?>" data-phtml="<?php echo $value['html']; ?>" data-pavailable=<?php echo $value['prod_available']; ?> data-plaunchdate="<?php echo $value['prod_launch_date']; ?>"><i class="fa fa-edit" aria-hidden="true"></i></button>
+                                            <button type="button" name="delete" class="delete_category" id=<?php echo $value['id']; ?>><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                            <!-- <button id="edit"><i class="fa fa-badge" aria-hidden="true"></i></button> -->
+                                        </td>
                                     </tr>
                                 <?php } ?>
                             </tbody>
@@ -396,6 +454,7 @@ if (isset($_POST['addcategory']) && $_POST['addcategory'] != null) {
 <script src="assets/js/argon.js?v=1.2.0"></script>
 <!-- Data Table -->
 <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="assets/js/admin_functions.js"></script>
 <script>
     $(document).ready(function() {
         $('#categoryTable').DataTable();

@@ -291,13 +291,13 @@ if (isset($_POST['addcategory']) && $_POST['addcategory'] != null) {
     </div>
     <!-- Page content -->
     <div class="container-fluid mt--6">
-    <div class="row form_on_update" style="display:none">
+        <div class="row form_on_update" style="display:none">
             <div class="col-xl-12">
                 <div class="card">
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col">
-                                <div class="h1 text-dark">Create New Product</div>
+                                <div class="h1 text-dark">Update Product</div>
                                 <div class="h4 text-gray">Enter Product Details</div>
                             </div>
                             <!-- <div class="col text-right">
@@ -306,105 +306,105 @@ if (isset($_POST['addcategory']) && $_POST['addcategory'] != null) {
                         </div>
                     </div>
                     <!-- <form method="POST"> -->
-                        <div class="form-group p-4 mb-0">
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1" class="form-control-label text-dark">Select Product Category <span class="comp">*</span></label>
-                                <select name="prod_parent_id" class="form-control" id="prod_parent_id">
-                                    <option>Please Select</option>
-                                    <?php $show_categories = new Product(); ?>
-                                    <?php $result = $show_categories->show_category($db->conn); ?>
-                                    <?php foreach ($result as $key => $value) { ?>
-                                        <option value=<?php echo $value['id']; ?>><?php echo $value['prod_name']; ?></option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label text-dark">Enter Product Name <span class="comp">*</span></label>
-                                <input class="form-control" type="hidden" name="prod_name" id="prod_id" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label text-dark">Enter Product Name <span class="comp">*</span></label>
-                                <input class="form-control" type="text" name="prod_name" id="product_name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label text-dark">Page HTML </label>
-                                <input class="form-control" type="text" name="html" id="page_html">
-                            </div>
-                            <hr class="sthr">
-                            <!-- <div class="card-header"> -->
-                            <div class="row align-items-center">
-                                <div class="col">
-                                    <div class="h2 text-dark">Product Description</div>
-                                    <div class="h4 text-gray">Enter Product Description Below</div>
-                                    <hr>
-                                </div>
-                                <!-- <div class="col text-right">
-                                        <a href="#!" class="btn btn-sm btn-primary">See all</a>
-                                    </div> -->
-                            </div>
-                            <!-- </div> -->
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label text-dark">Enter Monthly Price <span class="comp">*</span></label>
-                                <input class="form-control" type="text" name="mon_price" id="monthly_price" required>
-                                <p class="h6 py-2 text-gray">This would be monthly Plan</p>
-                            </div>
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label text-dark">Enter Annual Price <span class="comp">*</span></label>
-                                <input class="form-control" type="text" name="annual_price" id="annual_price" required>
-                                <p class="h6 py-2 text-gray">This would be Annual Price</p>
-                            </div>
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label text-dark">SKU <span class="comp">*</span></label>
-                                <input class="form-control" type="text" name="sku" id="sku" required>
-                            </div>
-                            <hr>
-                            <!-- <div class="card-header"> -->
-                            <div class="row align-items-center">
-                                <div class="col">
-                                    <div class="h2 text-dark">Features</div>
-                                </div>
-                                <!-- <div class="col text-right">
-                                        <a href="#!" class="btn btn-sm btn-primary">See all</a>
-                                    </div> -->
-                            </div>
-                            <!-- </div> -->
-                            <hr>
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label text-dark">Web Space (in GB) <span class="comp">*</span></label>
-                                <input class="form-control" type="text" name="web_space" id="web_space" required>
-                                <p class="h6 py-2 text-gray">Enter 0.5 for 512MB</p>
-                            </div>
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label text-dark">Bandwidth (in GB) <span class="comp">*</span></label>
-                                <input class="form-control" type="text" name="bandwidth" id="bandwidth" required>
-                                <p class="h6 py-2 text-gray">Enter 0.5 for 512MB</p>
-                            </div>
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label text-dark">Free Domain <span class="comp">*</span></label>
-                                <input class="form-control" type="text" name="free_domain" id="free_domain" required>
-                                <p class="h6 py-2 text-gray">Enter 0 if no domain available in this service</p>
-                            </div>
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label text-dark">Language/ Technology Support <span class="comp">*</span></label>
-                                <input class="form-control" type="text" name="langsupport" id="language_support" required>
-                                <p class="h6 py-2 text-gray">Separate by (,) Ex: PHP, MySQL, MongoDB</p>
-                            </div>
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label text-dark">Mailbox <span class="comp">*</span></label>
-                                <input class="form-control" type="text" name="mailbox" id="mailbox" required>
-                                <p class="h6 py-2 text-gray">Enter Number of mailbox will be provided, enter 0 if none</p>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1" class="form-control-label text-dark">Change Availability <span class="comp">*</span></label>
-                                <select name="availability_update" class="form-control" id="exampleFormControlSelect1">
-                                    <option value='1'>Available</option>
-                                    <option value='0'>Unavailable</option>
-                                </select>
-                            </div>
-                            <div class="form-group mb-0 text-center">
-                            <button type="button" name="update" class="btn btn-default update">Update</button>
-                            </div>
+                    <div class="form-group p-4 mb-0">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1" class="form-control-label text-dark">Select Product Category <span class="comp">*</span></label>
+                            <select name="prod_parent_id" class="form-control" id="prod_parent_id">
+                                <option>Please Select</option>
+                                <?php $show_categories = new Product(); ?>
+                                <?php $result = $show_categories->show_category($db->conn); ?>
+                                <?php foreach ($result as $key => $value) { ?>
+                                    <option value=<?php echo $value['id']; ?>><?php echo $value['prod_name']; ?></option>
+                                <?php } ?>
+                            </select>
                         </div>
+                        <div class="form-group">
+                            <label for="example-text-input" class="form-control-label text-dark">Enter Product Name <span class="comp">*</span></label>
+                            <input class="form-control" type="hidden" id="prod_id" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="example-text-input" class="form-control-label text-dark">Enter Product Name <span class="comp">*</span></label>
+                            <input class="form-control" type="text" name="prod_name" id="product_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="example-text-input" class="form-control-label text-dark">Page HTML </label>
+                            <input class="form-control" type="text" name="html" id="page_html">
+                        </div>
+                        <hr class="sthr">
+                        <!-- <div class="card-header"> -->
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <div class="h2 text-dark">Product Description</div>
+                                <div class="h4 text-gray">Enter Product Description Below</div>
+                                <hr>
+                            </div>
+                            <!-- <div class="col text-right">
+                                        <a href="#!" class="btn btn-sm btn-primary">See all</a>
+                                    </div> -->
+                        </div>
+                        <!-- </div> -->
+                        <div class="form-group">
+                            <label for="example-text-input" class="form-control-label text-dark">Enter Monthly Price <span class="comp">*</span></label>
+                            <input class="form-control" type="text" name="mon_price" id="monthly_price" required>
+                            <p class="h6 py-2 text-gray">This would be monthly Plan</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="example-text-input" class="form-control-label text-dark">Enter Annual Price <span class="comp">*</span></label>
+                            <input class="form-control" type="text" name="annual_price" id="annual_price" required>
+                            <p class="h6 py-2 text-gray">This would be Annual Price</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="example-text-input" class="form-control-label text-dark">SKU <span class="comp">*</span></label>
+                            <input class="form-control" type="text" name="sku" id="sku" required>
+                        </div>
+                        <hr>
+                        <!-- <div class="card-header"> -->
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <div class="h2 text-dark">Features</div>
+                            </div>
+                            <!-- <div class="col text-right">
+                                        <a href="#!" class="btn btn-sm btn-primary">See all</a>
+                                    </div> -->
+                        </div>
+                        <!-- </div> -->
+                        <hr>
+                        <div class="form-group">
+                            <label for="example-text-input" class="form-control-label text-dark">Web Space (in GB) <span class="comp">*</span></label>
+                            <input class="form-control" type="text" name="web_space" id="web_space" required>
+                            <p class="h6 py-2 text-gray">Enter 0.5 for 512MB</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="example-text-input" class="form-control-label text-dark">Bandwidth (in GB) <span class="comp">*</span></label>
+                            <input class="form-control" type="text" name="bandwidth" id="bandwidth" required>
+                            <p class="h6 py-2 text-gray">Enter 0.5 for 512MB</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="example-text-input" class="form-control-label text-dark">Free Domain <span class="comp">*</span></label>
+                            <input class="form-control" type="text" name="free_domain" id="free_domain" required>
+                            <p class="h6 py-2 text-gray">Enter 0 if no domain available in this service</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="example-text-input" class="form-control-label text-dark">Language/ Technology Support <span class="comp">*</span></label>
+                            <input class="form-control" type="text" name="langsupport" id="language_support" required>
+                            <p class="h6 py-2 text-gray">Separate by (,) Ex: PHP, MySQL, MongoDB</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="example-text-input" class="form-control-label text-dark">Mailbox <span class="comp">*</span></label>
+                            <input class="form-control" type="text" name="mailbox" id="mailbox" required>
+                            <p class="h6 py-2 text-gray">Enter Number of mailbox will be provided, enter 0 if none</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1" class="form-control-label text-dark">Change Availability <span class="comp">*</span></label>
+                            <select name="availability_update" class="form-control is_available" id="exampleFormControlSelect1">
+                                <option value='1'>Available</option>
+                                <option value='0'>Unavailable</option>
+                            </select>
+                        </div>
+                        <div class="form-group mb-0 text-center">
+                            <button type="button" name="update" class="btn btn-default update">Update</button>
+                        </div>
+                    </div>
                     <!-- </form> -->
                 </div>
             </div>
@@ -439,7 +439,7 @@ if (isset($_POST['addcategory']) && $_POST['addcategory'] != null) {
                                     <th>Language / Technology Support</th>
                                     <th>Mailbox</th>
                                     <th>Actions</th>
-                                    <th>Change Availability</th>
+                                    <!-- <th>Change Availability</th> -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -471,15 +471,11 @@ if (isset($_POST['addcategory']) && $_POST['addcategory'] != null) {
                                             <td><?php echo $v; ?></td>
                                         <?php } ?>
                                         <td>
-                                            <button type="button" name="edit" class="edit" id=<?php echo $value['prod_id']; ?> data-pid=<?php echo $value['id']; ?> data-pparentid=<?php echo $value['prod_parent_id']; ?> data-pname=<?php echo $value['prod_name']; ?> data-phtml=<?php echo $value['html']; ?> data-pavailable=<?php echo $value['prod_available']; ?> data-plaunchdate=<?php echo $value['prod_launch_date']; ?> data-pmonprice=<?php echo $value['mon_price']; ?> data-pannualprice=<?php echo $value['annual_price']; ?> data-psku=<?php echo $value['sku']; ?> <?php $description = json_decode($value['description']); ?>
-                                        <?php foreach ($description as $k => $v) {
-                                            echo "data-".$k."features='".$v."' ";
-                                        } ?>
-                                        data-pid=<?php echo $value['id']; ?>><i class="fa fa-edit" aria-hidden="true"></i></button>
+                                            <button type="button" name="edit" class="edit" id=<?php echo $value['prod_id']; ?> data-updatepid=<?php echo $value['prod_id']; ?> data-pid=<?php echo $value['id']; ?> data-pparentid=<?php echo $value['prod_parent_id']; ?> data-pname=<?php echo $value['prod_name']; ?> data-phtml=<?php echo $value['html']; ?> data-pavailable=<?php echo $value['prod_available']; ?> data-plaunchdate=<?php echo $value['prod_launch_date']; ?> data-pmonprice=<?php echo $value['mon_price']; ?> data-pannualprice=<?php echo $value['annual_price']; ?> data-psku=<?php echo $value['sku']; ?> <?php $description = json_decode($value['description']); ?> <?php foreach ($description as $k => $v) { echo "data-" . $k . "features='" . $v . "' "; } ?> data-pid=<?php echo $value['id']; ?>><i class="fa fa-edit" aria-hidden="true"></i></button>
                                             <button type="button" name="delete" class="delete" id=<?php echo $value['prod_id']; ?>><i class="fa fa-trash" aria-hidden="true"></i></button>
                                             <!-- <button id="edit"><i class="fa fa-badge" aria-hidden="true"></i></button> -->
                                         </td>
-                                        <td></td>
+                                        <!-- <td></td> -->
                                         <?php ?>
                                         <?php ?>
                                         <?php ?>
