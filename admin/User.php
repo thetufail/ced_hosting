@@ -1,9 +1,10 @@
 <?php
 
-require "vendor/autoload.php";
+// require "vendor/autoload.php";
 require_once 'Dbcon.php';
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+// use PHPMailer\PHPMailer\PHPMailer;
+// use PHPMailer\PHPMailer\Exception;
+
 
 class User
 {
@@ -11,11 +12,36 @@ class User
     {
         $sql = "INSERT INTO `tbl_user` (`email`,`name`,`mobile`,`email_approved`,`phone_approved`,`active`,`is_admin`,`sign_up_date`,`password`, `security_question`,`security_answer`) VALUES ('" . $email . "', '" . $name . "', '" . $mobile . "', " . $email_approved . ", " . $phone_approved . ", " . $active . ", " . $is_admin . ", '" . $sign_up_date . "', '" . $password . "', '" . $security_question . "', '" . $security_answer . "' )";
         if ($conn->query($sql) === true) {
+            $last_id = $conn->insert_id;
+            if (isset($_SESSION['email'])) {
+                // generate OTP
+                $otp = rand(100000, 999999);
+                // Send OTP
+                $send_otp = new User();
+                $send_otp-> sendOTP($email, $otp);
+                $mail_status=1; 
+                if($mail_status == 1) {
+                    $_SESSION['id'] = $last_id;
+                    $_SESSION['otp'] = $otp;
+                    header('Location: verification.php');
+                }
+            }
             echo 'okay';
-            // echo "<br> " . $sql;
+            echo "<br> " . $sql;
         } else {
             echo 'not okay';
             echo "<br> " . $sql;
+        }
+    }
+    
+    function update_signup_information ($id, $conn) 
+    {
+        $sql = "UPDATE `tbl_user` SET `email_approved` = '1' , `active` = '1' WHERE `id` = '" . $id . "'";
+        if ($conn->query($sql) === true) {
+            unset($_SESSION['otp']);
+            unset($_SESSION['id']);
+            unset($_SESSION['email']);
+            header('Location: http://localhost/ced_hosting/inde.php');
         }
     }
 
@@ -62,7 +88,7 @@ class User
             $mailer->Host = 'ssl://smtp.gmail.com';
             $mailer->SMTPAuth = true;
             $mailer->Username = 'neverlikebefore01@gmail.com';
-            $mailer->Password = 'ctrlaltmp4';
+            $mailer->Password = '';
             $mailer->SMTPSecure = 'tls';
             $mailer->Port = 465;
 
@@ -80,4 +106,30 @@ class User
             echo "EMAIL SENDING FAILED. INFO: " . $mailer->ErrorInfo;
         }  
     }
+
+    function sendOTP($email, $otp) {
+        require('phpmailer/class.phpmailer.php');
+        require('phpmailer/class.smtp.php');
+        
+        $message_body = "One Time Password for PHP login authentication is:<br/><br/>" . $otp;
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        $mail->SMTPDebug = 0;
+        $mail->SMTPAuth = true;
+        $mail->SMTPSecure = 'tls'; // tls or ssl
+        $mail->Port     = "587";
+        $mail->Username = "neverlikebefore01@gmail.com";
+        $mail->Password = "";
+        $mail->Host     = "smtp.gmail.com";
+        $mail->Mailer   = "smtp";
+        $mail->SetFrom("neverlikebefore01@gmail.com", "web");
+        $mail->AddAddress($email);
+        $mail->Subject = "OTP to Login";
+        $mail->MsgHTML($message_body);
+        $mail->IsHTML(true);
+        $result = $mail->Send();
+        
+        return $result;
+    }
+
 }
