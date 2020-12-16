@@ -1,11 +1,6 @@
 <?php
 
-// require "vendor/autoload.php";
 require_once 'Dbcon.php';
-require 'textlocal/textlocal.class.php';
-// use PHPMailer\PHPMailer\PHPMailer;
-// use PHPMailer\PHPMailer\Exception;
-
 
 class User
 {
@@ -21,7 +16,7 @@ class User
                 $send_otp = new User();
                 $send_otp-> sendOTP($email, $otp);
                 $send_otp-> sendOTPmobile($mobile, $otp);
-                $mail_status=1; 
+                $mail_status = 1; 
                 if ($mail_status == 1) {
                     $_SESSION['id'] = $last_id;
                     $_SESSION['otp'] = $otp;
@@ -131,7 +126,6 @@ class User
         $mail->MsgHTML($message_body);
         $mail->IsHTML(true);
         $result = $mail->Send();
-        
         return $result;
     }
 

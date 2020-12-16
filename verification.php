@@ -3,7 +3,7 @@
 <?php require_once 'admin/User.php'; ?>
 <?php
 
-if (isset($_POST['verifyOTPbyEmail']) && $_POST['verifyOTPbyEmail'] !=null) {
+if (isset($_POST['verifyOTPbyEmail']) && $_POST['verifyOTPbyEmail'] != null) {
     $opt_by_email = $_POST['enterOTPbyemail'];
     if (isset($_SESSION['otp']) && $opt_by_email == $_SESSION['otp']) {
         $update_signup_information = new User();
@@ -12,12 +12,12 @@ if (isset($_POST['verifyOTPbyEmail']) && $_POST['verifyOTPbyEmail'] !=null) {
         <script>
             alert('OTP verification failed. Please re-enter OTP.');
         </script>
-<?php
+    <?php
 
     }
 }
 
-if (isset($_POST['verifyOTPbyMobile']) && $_POST['verifyOTPbyMobile'] !=null) {
+if (isset($_POST['verifyOTPbyMobile']) && $_POST['verifyOTPbyMobile'] != null) {
     $opt_by_mobile = $_POST['enterOTPbymobile'];
     if (isset($_SESSION['otp']) && $opt_by_mobile == $_SESSION['otp']) {
         $update_signup_information = new User();

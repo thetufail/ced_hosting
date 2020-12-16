@@ -52,7 +52,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="content">
             <div class="linux-section">
                 <div class="container">
-
+                    
                     <div class="linux-grids">
                         <div class="col-md-8 linux-grid">
                             <h2><?php $view_category_of_products = new Product(); ?>
