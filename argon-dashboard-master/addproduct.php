@@ -346,8 +346,9 @@ if (isset($_POST['addproduct']) && $_POST['addproduct'] != null) {
                                 <input class="form-control" type="text" name="prod_name" id="product_name" required>
                             </div>
                             <div class="form-group">
-                                <label for="example-text-input" class="form-control-label text-dark">Page URL </label>
-                                <input class="form-control" type="text" name="html" id="page_url">
+                                <label for="example-text-input" class="form-control-label text-dark">Page HTML </label>
+                                <!-- <input class="form-control" type="text" name="html" id="page_url"> -->
+                                <textarea class="form-control html" name="html" id="page_url"></textarea>
                             </div>
                             <hr class="sthr">
                             <!-- <div class="card-header"> -->

@@ -321,7 +321,7 @@ if (isset($_POST['addcategory']) && $_POST['addcategory'] != null) {
                             </div>
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">Html</label>
-                                <input class="form-control" type="text" name="link" id="page_html">
+                                <textarea class="form-control html" name="link" id="page_html"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1" class="form-control-label text-dark">Change Availability <span class="comp">*</span></label>
@@ -368,7 +368,7 @@ if (isset($_POST['addcategory']) && $_POST['addcategory'] != null) {
                             </div>
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">Html</label>
-                                <input class="form-control" type="text" name="link">
+                                <textarea class="form-control html" name="link" ></textarea>
                             </div>
                             <input type="submit" name="addcategory" value="Add Category" class="btn btn-default">
                         </div>

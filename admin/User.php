@@ -2,6 +2,7 @@
 
 // require "vendor/autoload.php";
 require_once 'Dbcon.php';
+require 'textlocal/textlocal.class.php';
 // use PHPMailer\PHPMailer\PHPMailer;
 // use PHPMailer\PHPMailer\Exception;
 
@@ -19,8 +20,9 @@ class User
                 // Send OTP
                 $send_otp = new User();
                 $send_otp-> sendOTP($email, $otp);
+                $send_otp-> sendOTPmobile($mobile, $otp);
                 $mail_status=1; 
-                if($mail_status == 1) {
+                if ($mail_status == 1) {
                     $_SESSION['id'] = $last_id;
                     $_SESSION['otp'] = $otp;
                     header('Location: verification.php');
@@ -34,14 +36,15 @@ class User
         }
     }
     
-    function update_signup_information ($id, $conn) 
+    function update_signup_information ($id,$email_approved, $phone_approved, $active, $conn) 
     {
-        $sql = "UPDATE `tbl_user` SET `email_approved` = '1' , `active` = '1' WHERE `id` = '" . $id . "'";
+        $sql = "UPDATE `tbl_user` SET `email_approved` = '".$email_approved."' , `phone_approved` = '".$phone_approved."', `active` = '".$active."' WHERE `id` = '" . $id . "'";
         if ($conn->query($sql) === true) {
             unset($_SESSION['otp']);
             unset($_SESSION['id']);
             unset($_SESSION['email']);
-            header('Location: http://localhost/ced_hosting/inde.php');
+            unset($_SESSION['mobno']);
+            header('Location: http://localhost/ced_hosting/login.php');
         }
     }
 
@@ -132,4 +135,48 @@ class User
         return $result;
     }
 
+    function sendOTPmobile($mobile, $otp)
+    {
+        $message = "Your One Time Password is " . $otp;
+        $fields = array(
+            "sender_id" => "FSTSMS",
+            "message" =>"$message",
+            "language" => "english",
+            "route" => "p",
+            "numbers" => "$mobile",
+        );
+        
+        $curl = curl_init();
+        
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://www.fast2sms.com/dev/bulk",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_SSL_VERIFYHOST => 0,
+            CURLOPT_SSL_VERIFYPEER => 0,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => json_encode($fields),
+            CURLOPT_HTTPHEADER => array(
+            "authorization: ",
+            "accept: */*",
+            "cache-control: no-cache",
+            "content-type: application/json"
+            ),
+        ));
+        
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        
+        curl_close($curl);
+        
+        if ($err) {
+          echo "cURL Error #:" . $err;
+        } else {
+          echo $response;
+         
+        }
+    }
 }

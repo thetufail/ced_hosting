@@ -318,17 +318,18 @@ if (isset($_POST['addcategory']) && $_POST['addcategory'] != null) {
                                 <?php } ?>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="example-text-input" class="form-control-label text-dark">Enter Product Name <span class="comp">*</span></label>
+                        <!-- <div class="form-group"> -->
+                            <!-- <label for="example-text-input" class="form-control-label text-dark">Enter Product Name <span class="comp">*</span></label> -->
                             <input class="form-control" type="hidden" id="prod_id" required>
-                        </div>
+                        <!-- </div> -->
                         <div class="form-group">
                             <label for="example-text-input" class="form-control-label text-dark">Enter Product Name <span class="comp">*</span></label>
                             <input class="form-control" type="text" name="prod_name" id="product_name" required>
                         </div>
                         <div class="form-group">
                             <label for="example-text-input" class="form-control-label text-dark">Page HTML </label>
-                            <input class="form-control" type="text" name="html" id="page_html">
+                            <textarea class="form-control html" name="html" id="page_html"></textarea>
+                            <!-- <input class="form-control" type="text" name="html" id="page_html"> -->
                         </div>
                         <hr class="sthr">
                         <!-- <div class="card-header"> -->

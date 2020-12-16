@@ -18,6 +18,7 @@ if (isset($_POST['signup'])) {
     }
 
     $_SESSION['email'] = $_POST['email'];
+    $_SESSION['mobno'] = $_POST['mobno'];
     $sign_up_user = new User();
     $sign_up_user->signup($email, $name, $mobile, 0, 0, 0, 0, $sign_up_date, $password, $security_question, $security_answer, $db->conn);
 }
