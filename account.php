@@ -13,14 +13,18 @@ if (isset($_POST['signup'])) {
     $repassword = (isset($_POST['repass']) && $_POST['repass'] != null) ? md5($_POST['repass']) : '';
     $security_question = (isset($_POST['security_question']) && $_POST['security_question'] != null) ? $_POST['security_question'] : '';
     $security_answer = (isset($_POST['security_answer']) && $_POST['security_answer'] != null) ? $_POST['security_answer'] : '';
+    
     if ($password != $repassword || $name == ' ' || $name == ' ' || $mobile == ' ') {
         $errors[] = array('input' => 'password', 'message' => 'password doesn\'t match');
+    } else if ($security_question == "Choose one of the following as security question") {
+        ?><script>alert('Please select valid security question.');</script>
+        <?php
+    } else {
+        $_SESSION['email'] = $_POST['email'];
+        $_SESSION['mobno'] = $_POST['mobno'];
+        $sign_up_user = new User();
+        $sign_up_user->signup($email, $name, $mobile, 0, 0, 0, 0, $sign_up_date, $password, $security_question, $security_answer, $db->conn);
     }
-
-    $_SESSION['email'] = $_POST['email'];
-    $_SESSION['mobno'] = $_POST['mobno'];
-    $sign_up_user = new User();
-    $sign_up_user->signup($email, $name, $mobile, 0, 0, 0, 0, $sign_up_date, $password, $security_question, $security_answer, $db->conn);
 }
 
 ?>
@@ -96,7 +100,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <div>
                                 <span>Security Question<label>*</label></span>
                                 <select id="security_question" name="security_question">
-                                    <option selected>Choose one of the following as security question</option>
+                                    <option value="Choose one of the following as security question" selected>Choose one of the following as security question</option>
                                     <option value="What was your childhood nickname?">What was your childhood nickname?</option>
                                     <option value="What is the name of your favourite childhood friend?">What is the name of your favourite childhood friend?</option>
                                     <option value="What was your favourite place to visit as a child?">What was your favourite place to visit as a child?</option>

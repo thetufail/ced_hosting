@@ -1,5 +1,10 @@
 <?php session_start(); ?>
-<?php include_once 'admin/Product.php'; ?>
+<?php include_once 'admin/Product.php';
+$_SESSION['cart'] = [];
+$_SESSION['count_product'] = 0;
+
+?>
+
 <!--
 Author: W3layouts
 Author URL: http://w3layouts.com
@@ -52,7 +57,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="content">
             <div class="linux-section">
                 <div class="container">
-                    
+
                     <div class="linux-grids">
                         <div class="col-md-8 linux-grid">
                             <h2><?php $view_category_of_products = new Product(); ?>
@@ -114,7 +119,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                                     <li><strong>location</strong> : <img src="images/india.png"></li>
                                                 </ul>
                                             </div>
-                                            <a href="#">buy now</a>
+                                            <button type="button" name="edit" class="buynow" id=<?php echo $value['prod_id']; ?> data-updatepid=<?php echo $value['prod_id']; ?> data-pid=<?php echo $value['id']; ?> data-pparentid=<?php echo $value['prod_parent_id']; ?> data-pname=<?php echo $value['prod_name']; ?> data-phtml=<?php echo $value['html']; ?> data-pavailable=<?php echo $value['prod_available']; ?> data-plaunchdate=<?php echo $value['prod_launch_date']; ?> data-pmonprice=<?php echo $value['mon_price']; ?> data-pannualprice=<?php echo $value['annual_price']; ?> data-psku=<?php echo $value['sku']; ?> <?php $description = json_decode($value['description']); ?> <?php foreach ($description as $k => $v) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        echo "data-" . $k . "='" . $v . "' ";
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    } ?> data-pid=<?php echo $value['id']; ?>>Buy Now</i></button>
+                                            <!-- <a href="#">buy now</a> -->
                                         </div>
                                     <?php } ?>
                                     <div class="clearfix"></div>

@@ -40,7 +40,7 @@
                         <li><a href="pricing.php">Pricing</a></li>
                         <li><a href="blog.php">Blog</a></li>
                         <li><a href="contact.php">Contact</a></li>
-                        <li><a href="#">Cart <i class="fa fa-shopping-cart"></i></a></li>
+                        <li><a href="cart.php">Cart <i class="fa fa-shopping-cart"></i> <span class="product_count"> 0</span></a></li>
                         <?php if (isset($_SESSION['login'])) { ?>
                             <li><a href="login.php?logout=1">Logout</a></li>
                         <?php } else { ?>

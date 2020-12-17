@@ -101,7 +101,7 @@
 </div>
 <!---footer--->
 
-
+<script src="js/add_to_cart_functions.js"></script>
 </body>
 
 </html>

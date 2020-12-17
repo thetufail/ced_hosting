@@ -6,34 +6,44 @@ class User
 {
     function signup($email, $name, $mobile, $email_approved, $phone_approved, $active, $is_admin, $sign_up_date, $password, $security_question, $security_answer, $conn)
     {
-        $sql = "INSERT INTO `tbl_user` (`email`,`name`,`mobile`,`email_approved`,`phone_approved`,`active`,`is_admin`,`sign_up_date`,`password`, `security_question`,`security_answer`) VALUES ('" . $email . "', '" . $name . "', '" . $mobile . "', " . $email_approved . ", " . $phone_approved . ", " . $active . ", " . $is_admin . ", '" . $sign_up_date . "', '" . $password . "', '" . $security_question . "', '" . $security_answer . "' )";
-        if ($conn->query($sql) === true) {
-            $last_id = $conn->insert_id;
-            if (isset($_SESSION['email'])) {
-                // generate OTP
-                $otp = rand(100000, 999999);
-                // Send OTP
-                $send_otp = new User();
-                $send_otp-> sendOTP($email, $otp);
-                $send_otp-> sendOTPmobile($mobile, $otp);
-                $mail_status = 1; 
-                if ($mail_status == 1) {
-                    $_SESSION['id'] = $last_id;
-                    $_SESSION['otp'] = $otp;
-                    header('Location: verification.php');
+        $sql = "SELECT * FROM tbl_user WHERE `email` = '" . $email . "' OR `mobile` = '" . $mobile . "'";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+?>
+            <script>
+                alert('User already exists.');
+            </script>
+            <?php } else {
+
+            $sql = "INSERT INTO `tbl_user` (`email`,`name`,`mobile`,`email_approved`,`phone_approved`,`active`,`is_admin`,`sign_up_date`,`password`, `security_question`,`security_answer`) VALUES ('" . $email . "', '" . $name . "', '" . $mobile . "', " . $email_approved . ", " . $phone_approved . ", " . $active . ", " . $is_admin . ", '" . $sign_up_date . "', '" . $password . "', '" . $security_question . "', '" . $security_answer . "' )";
+            if ($conn->query($sql) === true) {
+                $last_id = $conn->insert_id;
+                if (isset($_SESSION['email'])) {
+                    // generate OTP
+                    $otp = rand(100000, 999999);
+                    // Send OTP
+                    $send_otp = new User();
+                    $send_otp->sendOTP($email, $otp);
+                    $send_otp->sendOTPmobile($mobile, $otp);
+                    $mail_status = 1;
+                    if ($mail_status == 1) {
+                        $_SESSION['id'] = $last_id;
+                        $_SESSION['otp'] = $otp;
+                        header('Location: verification.php');
+                    }
                 }
+                echo 'okay';
+                echo "<br> " . $sql;
+            } else {
+                echo 'not okay';
+                echo "<br> " . $sql;
             }
-            echo 'okay';
-            echo "<br> " . $sql;
-        } else {
-            echo 'not okay';
-            echo "<br> " . $sql;
         }
     }
-    
-    function update_signup_information ($id,$email_approved, $phone_approved, $active, $conn) 
+
+    function update_signup_information($id, $email_approved, $phone_approved, $active, $conn)
     {
-        $sql = "UPDATE `tbl_user` SET `email_approved` = '".$email_approved."' , `phone_approved` = '".$phone_approved."', `active` = '".$active."' WHERE `id` = '" . $id . "'";
+        $sql = "UPDATE `tbl_user` SET `email_approved` = '" . $email_approved . "' , `phone_approved` = '" . $phone_approved . "', `active` = '" . $active . "' WHERE `id` = '" . $id . "'";
         if ($conn->query($sql) === true) {
             unset($_SESSION['otp']);
             unset($_SESSION['id']);
@@ -53,12 +63,14 @@ class User
                 if (($row['email_approved'] == 1 || $row['phone_approved'] == 1) && $row['active'] == 1 && $row['is_admin'] == 0 && $row['password'] == $password) {
                     $_SESSION['login'] = array('id' => $row['id'], 'email' => $row['email'], 'name' => $row['name'], 'mobile' => $row['mobile'], 'email_approved' => $row['email_approved'], 'phone_approved' => $row['phone_approved'], 'active' => $row['active'], 'is_admin' => $row['is_admin'], 'sign_up_date' => $row['sign_up_date']);
                     header('Location:inde.php');
-                    ?>
-                    <script>alert('Yes');</script>
+            ?>
+                    <script>
+                        alert('Yes');
+                    </script>
                     <!-- echo $_SESSION; -->
-                    <?php } else if (($row['email_approved'] == 1 || $row['phone_approved'] == 1) && $row['active'] == 1 && $row['is_admin'] == 1 && $row['password'] == $password) {
-                        $_SESSION['login'] = array('id' => $row['id'], 'email' => $row['email'], 'name' => $row['name'], 'mobile' => $row['mobile'], 'email_approved' => $row['email_approved'], 'phone_approved' => $row['phone_approved'], 'active' => $row['active'], 'is_admin' => $row['is_admin'], 'sign_up_date' => $row['sign_up_date']);
-                        header('Location:argon-dashboard-master/index.php');
+        <?php } else if (($row['email_approved'] == 1 || $row['phone_approved'] == 1) && $row['active'] == 1 && $row['is_admin'] == 1 && $row['password'] == $password) {
+                    $_SESSION['login'] = array('id' => $row['id'], 'email' => $row['email'], 'name' => $row['name'], 'mobile' => $row['mobile'], 'email_approved' => $row['email_approved'], 'phone_approved' => $row['phone_approved'], 'active' => $row['active'], 'is_admin' => $row['is_admin'], 'sign_up_date' => $row['sign_up_date']);
+                    header('Location:argon-dashboard-master/index.php');
                 }
             }
         } else {
@@ -66,7 +78,7 @@ class User
         }
     }
 
-    function verify_email($email) 
+    function verify_email($email)
     {
         $developmentMode = true;
         $mailer = new PHPMailer($developmentMode);
@@ -76,11 +88,11 @@ class User
             $mailer->isSMTP();
             if ($developmentMode) {
                 $mailer->SMTPOptions = [
-                'ssl'=> [
-                'verify_peer' => false,
-                'verify_peer_name' => false,
-                'allow_self_signed' => true
-                ]
+                    'ssl' => [
+                        'verify_peer' => false,
+                        'verify_peer_name' => false,
+                        'allow_self_signed' => true
+                    ]
                 ];
             }
             $mailer->Host = 'ssl://smtp.gmail.com';
@@ -95,20 +107,21 @@ class User
 
             $mailer->isHTML(true);
             $mailer->Subject = 'PHPMailer Test';
-            $mailer->Body = 'http://localhost/ced_hosting/verification.php?email='.$email.'';
+            $mailer->Body = 'http://localhost/ced_hosting/verification.php?email=' . $email . '';
 
             $mailer->send();
             $mailer->ClearAllRecipients();
             echo "MAIL HAS BEEN SENT SUCCESSFULLY";
         } catch (Exception $e) {
             echo "EMAIL SENDING FAILED. INFO: " . $mailer->ErrorInfo;
-        }  
+        }
     }
 
-    function sendOTP($email, $otp) {
+    function sendOTP($email, $otp)
+    {
         require('phpmailer/class.phpmailer.php');
         require('phpmailer/class.smtp.php');
-        
+
         $message_body = "One Time Password for PHP login authentication is:<br/><br/>" . $otp;
         $mail = new PHPMailer();
         $mail->IsSMTP();
@@ -134,14 +147,14 @@ class User
         $message = "Your One Time Password is " . $otp;
         $fields = array(
             "sender_id" => "FSTSMS",
-            "message" =>"$message",
+            "message" => "$message",
             "language" => "english",
             "route" => "p",
             "numbers" => "$mobile",
         );
-        
+
         $curl = curl_init();
-        
+
         curl_setopt_array($curl, array(
             CURLOPT_URL => "https://www.fast2sms.com/dev/bulk",
             CURLOPT_RETURNTRANSFER => true,
@@ -154,23 +167,22 @@ class User
             CURLOPT_CUSTOMREQUEST => "POST",
             CURLOPT_POSTFIELDS => json_encode($fields),
             CURLOPT_HTTPHEADER => array(
-            "authorization: ",
-            "accept: */*",
-            "cache-control: no-cache",
-            "content-type: application/json"
+                "authorization: ",
+                "accept: */*",
+                "cache-control: no-cache",
+                "content-type: application/json"
             ),
         ));
-        
+
         $response = curl_exec($curl);
         $err = curl_error($curl);
-        
+
         curl_close($curl);
-        
+
         if ($err) {
-          echo "cURL Error #:" . $err;
+            echo "cURL Error #:" . $err;
         } else {
-          echo $response;
-         
+            echo $response;
         }
     }
 }
